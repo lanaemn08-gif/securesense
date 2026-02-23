@@ -906,8 +906,8 @@ body {
       <button class="nav-link" onclick="scrollToProgress()">My Progress</button>
     </div>
     <div class="nav-stats">
-      <div class="nav-stat xp">⚡ <span id="nav-xp">0</span> XP</div>
-      <div class="nav-stat streak">🔥 <span id="nav-streak">0</span></div>
+      <div class="nav-stat xp"><span id="nav-xp">0</span> XP</div>
+      <div class="nav-stat streak"><span id="nav-streak">0</span></div>
     </div>
   </div>
 </nav>
@@ -918,11 +918,11 @@ body {
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">🛡️ Cybersecurity Awareness Training</div>
+      <div class="hero-badge">Cybersecurity Awareness Training</div>
       <h1>Stay Safe in a <span>Digital World</span></h1>
       <p>Learn essential cybersecurity skills through short, interactive lessons. Protect yourself, your data, and your organisation.</p>
       <div class="hero-actions">
-        <button class="btn-hero" onclick="scrollToLessons()">🚀 Start Learning</button>
+        <button class="btn-hero" onclick="scrollToLessons()">Start Learning</button>
         <button class="btn-hero-outline" onclick="scrollToProgress()">View Progress</button>
       </div>
       <div class="hero-stats">
@@ -939,27 +939,27 @@ body {
     <!-- Progress Overview -->
     <div id="progress-section">
       <div class="section-header">
-        <h2>📊 Your Progress</h2>
+        <h2>Your Progress</h2>
         <p>Track your learning streak and XP across all modules</p>
       </div>
       <div class="overview-grid">
         <div class="overview-card green">
-          <div class="ov-icon">⚡</div>
+          <div class="ov-icon">XP</div>
           <div class="ov-val" id="ov-xp">0</div>
           <div class="ov-lbl">Total XP</div>
         </div>
         <div class="overview-card yellow">
-          <div class="ov-icon">🔥</div>
+          <div class="ov-icon">STK</div>
           <div class="ov-val" id="ov-streak">0</div>
           <div class="ov-lbl">Day Streak</div>
         </div>
         <div class="overview-card blue">
-          <div class="ov-icon">🏆</div>
+          <div class="ov-icon">LVL</div>
           <div class="ov-val" id="ov-lessons">0</div>
           <div class="ov-lbl">Lessons Done</div>
         </div>
         <div class="overview-card">
-          <div class="ov-icon">⭐</div>
+          <div class="ov-icon">STR</div>
           <div class="ov-val" id="ov-stars">0</div>
           <div class="ov-lbl">Stars Earned</div>
         </div>
@@ -1007,7 +1007,7 @@ body {
       <div class="progress-bar-wrap">
         <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
       </div>
-      <div class="hearts-display" id="hearts-display">❤️ <span id="hearts-count">3</span></div>
+      <div class="hearts-display" id="hearts-display">Hearts: <span id="hearts-count">3</span></div>
     </div>
 
     <div class="quiz-body" id="quiz-body"></div>
@@ -1030,20 +1030,20 @@ body {
 <!-- ════════ COMPLETE MODAL ════════ -->
 <div id="complete-screen" class="screen">
   <div class="complete-modal">
-    <span class="trophy-anim" id="complete-trophy">🏆</span>
+    <span class="trophy-anim" id="complete-trophy">COMPLETE</span>
     <h2 id="complete-title">Lesson Complete!</h2>
     <p id="complete-subtitle">Great work — keep it up!</p>
     <div class="result-stats">
       <div class="rstat green"><div class="rv" id="final-xp">+0</div><div class="rl">XP Earned</div></div>
       <div class="rstat"><div class="rv" id="final-accuracy">0%</div><div class="rl">Accuracy</div></div>
-      <div class="rstat"><div class="rv" id="final-rating">⭐</div><div class="rl">Rating</div></div>
+      <div class="rstat"><div class="rv" id="final-rating">B</div><div class="rl">Rating</div></div>
     </div>
     <div id="level-up-banner" style="display:none; background:rgba(255,200,0,0.15); border:2px solid #ffc800; border-radius:12px; padding:12px 16px; margin-bottom:16px; text-align:center;">
-      <div style="font-family:'Orbitron',sans-serif; font-size:13px; color:#ffc800; letter-spacing:2px;">⚡ LEVEL UP!</div>
+      <div style="font-family:'Orbitron',sans-serif; font-size:13px; color:#ffc800; letter-spacing:2px;">LEVEL UP!</div>
       <div id="level-up-text" style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#9aa0b0; margin-top:4px;"></div>
     </div>
-    <button class="btn-primary" onclick="finishLesson()">🏠 Back to Lessons</button>
-    <button class="btn-secondary" onclick="retryLesson()">🔄 Try Again</button>
+    <button class="btn-primary" onclick="finishLesson()">Back to Lessons</button>
+    <button class="btn-secondary" onclick="retryLesson()">Try Again</button>
   </div>
 </div>
 
@@ -1056,10 +1056,10 @@ body {
       <button class="btn-close" onclick="closeVocab()">✕</button>
       <div class="quiz-lesson-label">Vocabulary Practice</div>
       <div style="flex:1"></div>
-      <div class="hearts-display">❤️ <span id="vocab-hearts-count">0</span></div>
+      <div class="hearts-display">Hearts: <span id="vocab-hearts-count">0</span></div>
     </div>
     <div style="padding:28px 28px 20px;">
-      <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:700; color:var(--text); letter-spacing:1px; margin-bottom:8px; text-align:center;">💔 Out of Hearts!</div>
+      <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:700; color:var(--text); letter-spacing:1px; margin-bottom:8px; text-align:center;">Out of Hearts!</div>
       <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--text-light); margin-bottom:20px; line-height:1.6; text-align:center;">Practice cybersecurity vocabulary to earn hearts back. Match 5 terms correctly to restore all hearts!</div>
       
       <div style="background:#33363f; border-radius:12px; padding:16px; margin-bottom:16px;">
@@ -1175,7 +1175,7 @@ let vocabState = {
 
 const LESSONS = [
   {
-    title: "Phishing Attacks", icon: "🎣", color: "blue", minLevel: 5,
+    title: "Phishing Attacks", icon: "", color: "blue", minLevel: 5,
     desc: "Learn to identify and avoid phishing emails, fake websites, and deceptive links designed to steal your information.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Phishing emails are always easy to spot because they contain obvious spelling mistakes.", correct:false,
@@ -1203,7 +1203,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Password Security", icon: "🔑", color: "green",
+    title: "Password Security", icon: "", color: "green",
     desc: "Master the art of creating strong passwords, using password managers, and enabling multi-factor authentication.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"'password123' is a weak password that should never be used.", correct:true,
@@ -1231,7 +1231,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Social Engineering", icon: "🎭", color: "purple",
+    title: "Social Engineering", icon: "", color: "purple",
     desc: "Understand how attackers manipulate human psychology to bypass security — and how to recognise and resist these tactics.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Social engineering attacks rely on tricking people rather than exploiting technical vulnerabilities.", correct:true,
@@ -1259,7 +1259,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Safe Browsing", icon: "🌐", color: "teal",
+    title: "Safe Browsing", icon: "", color: "teal",
     desc: "Discover how to browse the internet safely, protect your privacy, and use public Wi-Fi securely.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"It is safe to use public Wi-Fi for online banking without any extra precautions.", correct:false,
@@ -1287,7 +1287,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Malware & Downloads", icon: "🦠", color: "orange", minLevel: 5,
+    title: "Malware & Downloads", icon: "", color: "orange", minLevel: 5,
     desc: "Understand malware types, how they spread through downloads, and how to keep your devices protected.",
     easy: [
       { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is malware?", choices:["A slow internet connection","Software designed to harm, exploit, or gain unauthorised access","A type of firewall","An antivirus program"], correct:1,
@@ -1315,7 +1315,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Social Media Safety", icon: "📱", color: "red", minLevel: 5,
+    title: "Social Media Safety", icon: "", color: "red", minLevel: 5,
     desc: "Protect your personal information on social media, spot scams, and manage your digital footprint.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"It's safe to share your full date of birth, home town, and phone number publicly on social media.", correct:false,
@@ -1343,7 +1343,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Wi-Fi Network Safety", icon: "📡", color: "blue",
+    title: "Wi-Fi Network Safety", icon: "", color: "blue",
     desc: "Learn to secure your home network, protect yourself on public Wi-Fi, and understand wireless security protocols.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Using the default password on your home Wi-Fi router is safe because it's unique to your device.", correct:false,
@@ -1371,7 +1371,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Identity Theft & Credit Protection", icon: "🛡️", color: "purple", minLevel: 5,
+    title: "Identity Theft & Credit Protection", icon: "", color: "purple", minLevel: 5,
     desc: "Protect your identity, monitor your credit, and understand how to prevent and respond to identity theft.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Checking your credit report regularly can help you detect identity theft early.", correct:true,
@@ -1399,7 +1399,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Online Shopping Safety", icon: "🛒", color: "orange", minLevel: 5,
+    title: "Online Shopping Safety", icon: "", color: "orange", minLevel: 5,
     desc: "Shop securely online, identify fake stores, protect your payment information, and avoid common e-commerce scams.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"You should only shop on websites that have 'https://' in their address bar.", correct:true,
@@ -1427,7 +1427,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Physical Access Security", icon: "🚪", color: "teal",
+    title: "Physical Access Security", icon: "", color: "teal",
     desc: "Understand physical security risks, from unlocked devices to shoulder surfing, and learn to protect your physical access points.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Leaving your laptop unattended in a coffee shop while you use the restroom is safe if you're only gone for a minute.", correct:false,
@@ -1593,7 +1593,7 @@ function renderQuestion() {
     <div class="q-text">${q.question}</div>
   `;
 
-  if (q.hint) html += `<div class="q-hint">💡 ${q.hint}</div>`;
+  if (q.hint) html += `<div class="q-hint">${q.hint}</div>`;
 
   if (q.type === 'multiple') {
     html += `<div class="choices-grid">`;
@@ -1605,8 +1605,8 @@ function renderQuestion() {
     html += `</div>`;
   } else if (q.type === 'truefalse') {
     html += `<div class="tf-grid">
-      <button class="tf-btn true-btn" id="tf-true" onclick="selectTF(true)"><span class="tf-icon">✅</span><span>TRUE</span></button>
-      <button class="tf-btn false-btn" id="tf-false" onclick="selectTF(false)"><span class="tf-icon">❌</span><span>FALSE</span></button>
+      <button class="tf-btn true-btn" id="tf-true" onclick="selectTF(true)"><span>TRUE</span></button>
+      <button class="tf-btn false-btn" id="tf-false" onclick="selectTF(false)"><span>FALSE</span></button>
     </div>`;
   } else if (q.type === 'fillin') {
     html += `<input class="fill-input" id="fill-input" type="text" placeholder="Type your answer…"
@@ -1719,7 +1719,7 @@ function showFeedback(isCorrect, explanation) {
   const panel = document.getElementById('feedback-panel');
   panel.style.display = 'block';
   panel.className = 'feedback-panel ' + (isCorrect ? 'correct-panel' : 'wrong-panel');
-  document.getElementById('fb-icon').textContent = isCorrect ? '🎉' : '💡';
+  document.getElementById('fb-icon').textContent = isCorrect ? '' : '';
   document.getElementById('fb-title').textContent = isCorrect
     ? ['Correct!','Amazing!','You got it!','Nailed it!','Great job!'][Math.floor(Math.random()*5)]
     : "Here's what you need to know:";
@@ -1761,8 +1761,8 @@ function showComplete() {
   document.getElementById('progress-bar').style.width = '100%';
   document.getElementById('final-xp').textContent = wasFirstTime ? '+' + quiz.xpEarned : '+0';
   document.getElementById('final-accuracy').textContent = accuracy + '%';
-  document.getElementById('final-rating').textContent = accuracy===100?'🏆':accuracy>=60?'⭐⭐':'⭐';
-  document.getElementById('complete-trophy').textContent = accuracy===100?'🏆':accuracy>=60?'🎯':'💪';
+  document.getElementById('final-rating').textContent = accuracy===100?'S':accuracy>=60?'A':'B';
+  document.getElementById('complete-trophy').textContent = accuracy===100?'PERFECT':accuracy>=60?'GOOD':'COMPLETE';
   document.getElementById('complete-title').textContent = accuracy===100?'Perfect Score!':'Lesson Complete!';
   
   const subtitle = `${quiz.correctCount}/${total} correct · ${accuracy}% accuracy`;
@@ -1864,7 +1864,7 @@ function checkVocabAnswer(idx, selectedChoice) {
         popXP(0); // Just for the animation effect
         const el = document.createElement('div');
         el.className = 'xp-pop';
-        el.textContent = '❤️ Hearts Restored!';
+        el.textContent = 'Hearts Restored!';
         el.style.background = 'var(--red)';
         el.style.color = 'white';
         document.body.appendChild(el);
@@ -1902,7 +1902,7 @@ function scrollToProgress() { document.getElementById('progress-section')?.scrol
 function popXP(amount) {
   const el = document.createElement('div');
   el.className = 'xp-pop';
-  el.textContent = `+${amount} XP ⚡`;
+  el.textContent = `+${amount} XP`;
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 1400);
 }
