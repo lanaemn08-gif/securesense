@@ -298,6 +298,12 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+.lesson-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .lesson-card::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0;
@@ -1315,7 +1321,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Social Media Safety", icon: "📱", color: "red", minLevel: 5,
+    title: "Social Media Safety", icon: "📱", color: "red", minXP: 200,
     desc: "Protect your personal information on social media, spot scams, and manage your digital footprint.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"It's safe to share your full date of birth, home town, and phone number publicly on social media.", correct:false,
@@ -1343,7 +1349,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Wi-Fi Network Safety", icon: "📡", color: "blue",
+    title: "Wi-Fi Network Safety", icon: "📡", color: "blue", minXP: 200,
     desc: "Learn to secure your home network, protect yourself on public Wi-Fi, and understand wireless security protocols.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Using the default password on your home Wi-Fi router is safe because it's unique to your device.", correct:false,
@@ -1371,7 +1377,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Identity Theft & Credit Protection", icon: "🛡️", color: "purple", minLevel: 5,
+    title: "Identity Theft & Credit Protection", icon: "🛡️", color: "purple", minXP: 200,
     desc: "Protect your identity, monitor your credit, and understand how to prevent and respond to identity theft.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Checking your credit report regularly can help you detect identity theft early.", correct:true,
@@ -1399,7 +1405,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Online Shopping Safety", icon: "🛒", color: "orange", minLevel: 5,
+    title: "Online Shopping Safety", icon: "🛒", color: "orange", minXP: 200,
     desc: "Shop securely online, identify fake stores, protect your payment information, and avoid common e-commerce scams.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"You should only shop on websites that have 'https://' in their address bar.", correct:true,
@@ -1427,7 +1433,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Physical Access Security", icon: "🚪", color: "teal",
+    title: "Physical Access Security", icon: "🚪", color: "teal", minXP: 200,
     desc: "Understand physical security risks, from unlocked devices to shoulder surfing, and learn to protect your physical access points.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"Leaving your laptop unattended in a coffee shop while you use the restroom is safe if you're only gone for a minute.", correct:false,
@@ -1521,8 +1527,10 @@ function renderHome() {
       ? `<span class="badge-done">✓ COMPLETE</span>`
       : `<span class="badge-new">NEW</span>`;
 
+    const isLocked = lesson.minXP && state.xp < lesson.minXP;
+
     const card = document.createElement('div');
-    card.className = 'lesson-card';
+    card.className = 'lesson-card' + (isLocked ? ' locked' : '');
     card.dataset.color = lesson.color;
     card.onclick = () => startLesson(idx);
     card.innerHTML = `
@@ -1534,9 +1542,11 @@ function renderHome() {
       <div class="lesson-card-desc">${lesson.desc}</div>
       <div class="lesson-card-footer">
         <div class="lesson-meta">
-          <span class="lesson-pill">📝 ${lesson.easy.length} questions</span>
+          ${isLocked
+            ? `<span class="lesson-pill" style="background:rgba(160,160,160,0.15);color:#a0a0a0;">🔒 Unlocks at ${lesson.minXP} XP</span>`
+            : `<span class="lesson-pill">📝 ${lesson.easy.length} questions</span>`}
         </div>
-        ${badgeHTML}
+        ${isLocked ? '' : badgeHTML}
       </div>
       <div class="lesson-progress-bar">
         <div class="lesson-progress-fill" style="width:${progress}%"></div>
@@ -1551,6 +1561,8 @@ function renderHome() {
 // ══════════════════════════════════════════════════════════════════
 
 function startLesson(idx) {
+  if (LESSONS[idx].minXP && state.xp < LESSONS[idx].minXP) return;
+
   quiz.lessonIdx = idx;
   quiz.questionIdx = 0;
   quiz.correctCount = 0;
