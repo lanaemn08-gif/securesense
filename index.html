@@ -1512,7 +1512,8 @@ let quiz = {
   answered: false,
   xpEarned: 0,
   hearts: 3,
-  isFirstTime: false
+  isFirstTime: false,
+  shuffledQuestions: []
 };
 
 // ══════════════════════════════════════════════════════════════════
@@ -1551,6 +1552,15 @@ const DAILY_TIPS = [
   "Check your credit report regularly for accounts you don't recognise.",
   "Think carefully about what personal information you post publicly online."
 ];
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 (function setDailyTip() {
   const day = Math.floor(Date.now() / 86400000);
@@ -1644,6 +1654,7 @@ function startLesson(idx) {
   quiz.xpEarned = 0;
   quiz.hearts = 3;
   quiz.isFirstTime = !state.lessonCompleted[idx]; // Track if first time
+  quiz.shuffledQuestions = shuffleArray(LESSONS[idx].easy);
 
   const lesson = LESSONS[idx];
   document.getElementById('quiz-lesson-label').textContent = lesson.title;
@@ -1658,7 +1669,7 @@ function startLesson(idx) {
 // ══════════════════════════════════════════════════════════════════
 
 function renderQuestion() {
-  const questions = LESSONS[quiz.lessonIdx].easy; // Only use easy questions
+  const questions = quiz.shuffledQuestions; // Only use easy questions
   const q = questions[quiz.questionIdx];
   const total = questions.length;
 
@@ -1736,7 +1747,7 @@ function onFillInput() {
 
 function checkAnswer() {
   if (quiz.answered) return;
-  const q = LESSONS[quiz.lessonIdx].easy[quiz.questionIdx]; // Only use easy
+  const q = quiz.shuffledQuestions[quiz.questionIdx]; // Only use easy
   let correct = false;
 
   if (q.type === 'multiple') {
@@ -1812,7 +1823,7 @@ function showFeedback(isCorrect, explanation) {
 }
 
 function nextQuestion() {
-  const questions = LESSONS[quiz.lessonIdx].easy; // Only use easy
+  const questions = quiz.shuffledQuestions; // Only use easy
   quiz.questionIdx++;
   if (quiz.questionIdx >= questions.length) showComplete();
   else renderQuestion();
@@ -1823,7 +1834,7 @@ function nextQuestion() {
 // ══════════════════════════════════════════════════════════════════
 
 function showComplete() {
-  const questions = LESSONS[quiz.lessonIdx].easy;
+  const questions = quiz.shuffledQuestions;
   const total = questions.length;
   const accuracy = Math.round((quiz.correctCount / total) * 100);
   const prevXP = state.xp - quiz.xpEarned; // before this session
