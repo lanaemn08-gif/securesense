@@ -52,6 +52,28 @@ body {
 /* ════════════════════════════════════
    NAVBAR
 ════════════════════════════════════ */
+.daily-tip-bar {
+  background: #1a2a1a;
+  border-bottom: 2px solid #2a4a2a;
+  padding: 10px 32px;
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px; color: var(--green);
+  letter-spacing: 0.5px; line-height: 1.5;
+}
+
+.daily-tip-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--green); opacity: 0.7;
+  white-space: nowrap;
+}
+
+.daily-tip-text {
+  color: #b0d0b0;
+}
+
 .navbar {
   background: #22252e;
   border-bottom: 2px solid #3a3d47;
@@ -918,6 +940,12 @@ body {
   </div>
 </nav>
 
+<!-- ════════ DAILY TIP BAR ════════ -->
+<div class="daily-tip-bar">
+  <span class="daily-tip-label">Tip of the Day</span>
+  <span class="daily-tip-text" id="daily-tip-text"></span>
+</div>
+
 <!-- ════════ HOME SCREEN ════════ -->
 <div id="home-screen" class="screen active">
 
@@ -1484,6 +1512,49 @@ let quiz = {
   hearts: 3,
   isFirstTime: false
 };
+
+// ══════════════════════════════════════════════════════════════════
+//  DAILY TIP
+// ══════════════════════════════════════════════════════════════════
+
+const DAILY_TIPS = [
+  "Use a unique password for every account — a password manager makes this easy.",
+  "Enable multi-factor authentication (MFA) on all important accounts.",
+  "Think before you click — hover over links to check where they really lead.",
+  "Keep your operating system and apps updated to patch security vulnerabilities.",
+  "Never plug in a USB drive you found — it could be a baiting attack.",
+  "Use a VPN on public Wi-Fi to encrypt your internet traffic.",
+  "Check your bank and credit card statements regularly for suspicious charges.",
+  "Lock your screen whenever you step away from your device.",
+  "Be cautious of urgent emails asking you to act immediately — it's a red flag.",
+  "Back up your important files regularly to protect against ransomware.",
+  "Review the privacy settings on your social media accounts periodically.",
+  "Use HTTPS websites when entering any personal or payment information.",
+  "Never share your passwords with anyone, including IT support.",
+  "Shred documents containing personal information before throwing them away.",
+  "A padlock icon in your browser does not mean a site is safe — always check the URL.",
+  "Use a strong, unique passphrase of 16+ characters for your most important accounts.",
+  "Be wary of friend requests from people you don't know on social media.",
+  "Log out of accounts when using shared or public computers.",
+  "Check that software downloads come from the official developer's website.",
+  "Freeze your credit to prevent identity thieves from opening accounts in your name.",
+  "Legitimate organisations will never ask for your password by email or phone.",
+  "Update your router's default admin password to something strong and unique.",
+  "Use a credit card rather than a debit card for online purchases — it has better fraud protection.",
+  "Regularly audit which third-party apps have access to your social media accounts.",
+  "If an online deal looks too good to be true, it probably is a scam.",
+  "Enable automatic screen lock after a few minutes of inactivity on all devices.",
+  "Be aware of shoulder surfers when entering PINs or passwords in public.",
+  "Use WPA3 encryption on your home Wi-Fi network if your router supports it.",
+  "Check your credit report regularly for accounts you don't recognise.",
+  "Think carefully about what personal information you post publicly online."
+];
+
+(function setDailyTip() {
+  const day = Math.floor(Date.now() / 86400000);
+  const tip = DAILY_TIPS[day % DAILY_TIPS.length];
+  document.getElementById('daily-tip-text').textContent = tip;
+})();
 
 // ══════════════════════════════════════════════════════════════════
 //  RENDER HOME
