@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SecureSense – Cybersecurity Awareness Training</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #58cc02;
+  --green-dark: #46a302;
+  --green-light: #d7ffb8;
+  --red: #ff4b4b;
+  --red-light: #ffdfe0;
+  --blue: #1cb0f6;
+  --blue-dark: #009fd4;
+  --blue-light: #ddf4ff;
+  --navy: #1a3a6b;
+  --navy-light: #235390;
+  --yellow: #ffc800;
+  --yellow-light: #fff8e0;
+  --purple: #9c4fff;
+  --purple-light: #f3e8ff;
+  --teal: #00b8a9;
+  --teal-light: #e0faf8;
+  --orange: #ff6b35;
+  --orange-light: #fff0eb;
+  --gray: #a0a0a0;
+  --gray-light: #2a2d35;
+  --gray-medium: #3a3d47;
+  --card-bg: #2a2d35;
+  --text: #e8eaf0;
+  --text-light: #9aa0b0;
+  --white: #ffffff;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background: #1c1e24;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ════════════════════════════════════
+   NAVBAR
+════════════════════════════════════ */
+.navbar {
+  background: #22252e;
+  border-bottom: 2px solid #3a3d47;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 68px;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; cursor: pointer;
+}
+
+.nav-lock-icon {
+  width: 32px; height: 36px;
+  filter: drop-shadow(0 0 6px rgba(57,255,20,0.7)) drop-shadow(0 0 14px rgba(57,255,20,0.3));
+  flex-shrink: 0;
+}
+
+.nav-logo-text {
+  display: flex; flex-direction: column; line-height: 1;
+}
+
+.nav-logo-text .logo-secure {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px; font-weight: 900;
+  color: #e8eaf0; letter-spacing: 3px;
+}
+
+.nav-logo-text .logo-sense {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px; font-weight: 400;
+  color: var(--blue); letter-spacing: 3px;
+  margin-top: -2px;
+  text-shadow: 0 0 12px rgba(28,176,246,0.5);
+}
+
+.nav-logo-text .logo-tagline {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7px; letter-spacing: 3px;
+  color: #5a7a62; margin-top: 4px; text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 6px;
+}
+
+.nav-link {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px; font-weight: 400; color: var(--text-light);
+  padding: 8px 16px; border-radius: 10px;
+  transition: color 0.15s, background 0.15s;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--blue); background: rgba(28,176,246,0.15); }
+
+.nav-stats {
+  display: flex; align-items: center; gap: 16px;
+}
+
+.nav-stat {
+  display: flex; align-items: center; gap: 6px;
+  background: #33363f; border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px; font-weight: 400;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.nav-stat.xp { color: var(--green); background: rgba(88,204,2,0.15); }
+.nav-stat.streak { color: #ffaa00; background: rgba(255,200,0,0.12); }
+
+/* ════════════════════════════════════
+   SCREENS
+════════════════════════════════════ */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ════════════════════════════════════
+   HOME / HERO
+════════════════════════════════════ */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #2e6abf 60%, var(--blue) 100%);
+  color: white; text-align: center;
+  padding: 72px 32px 80px;
+  position: relative; overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-content { position: relative; max-width: 700px; margin: 0 auto; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 20px; padding: 6px 16px;
+  font-size: 11px; font-weight: 400;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 24px; backdrop-filter: blur(4px);
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(24px, 4vw, 44px); font-weight: 900;
+  margin-bottom: 16px; line-height: 1.2;
+  letter-spacing: 2px;
+}
+
+.hero h1 span { color: #7dd8ff; }
+
+.hero p {
+  font-size: 14px; font-weight: 400; opacity: 0.85;
+  margin-bottom: 36px; line-height: 1.8;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+.btn-hero {
+  background: var(--green); color: white; border: none;
+  border-radius: 12px; padding: 14px 32px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 5px 0 var(--green-dark);
+  font-family: 'Orbitron', sans-serif;
+  transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.btn-hero:hover { filter: brightness(1.06); }
+.btn-hero:active { transform: translateY(5px); box-shadow: none; }
+
+.btn-hero-outline {
+  background: rgba(255,255,255,0.12);
+  color: white; border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 12px; padding: 12px 26px;
+  font-size: 12px; font-weight: 400; cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: background 0.15s;
+  backdrop-filter: blur(4px);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.btn-hero-outline:hover { background: rgba(255,255,255,0.22); }
+
+.hero-stats {
+  display: flex; gap: 32px; justify-content: center;
+  margin-top: 48px; flex-wrap: wrap;
+}
+
+.hero-stat { text-align: center; }
+.hero-stat .num { font-size: 28px; font-weight: 900; font-family: 'Orbitron', sans-serif; }
+.hero-stat .lbl { font-size: 10px; font-weight: 400; opacity: 0.75; margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; font-family: 'Share Tech Mono', monospace; }
+
+/* ════════════════════════════════════
+   MAIN CONTENT LAYOUT
+════════════════════════════════════ */
+.main-container {
+  max-width: 1200px; margin: 0 auto;
+  padding: 48px 32px;
+}
+
+.section-header {
+  margin-bottom: 28px;
+}
+
+.section-header h2 {
+  font-size: 20px; font-weight: 900; color: var(--text);
+  margin-bottom: 6px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.section-header p {
+  font-size: 12px; color: var(--text-light);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════
+   PROGRESS OVERVIEW
+════════════════════════════════════ */
+.overview-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 48px;
+}
+
+.overview-card {
+  background: #2a2d35; border-radius: 18px;
+  padding: 24px 20px; text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--gray-medium);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.overview-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.overview-card .ov-icon { font-size: 36px; margin-bottom: 10px; }
+.overview-card .ov-val { font-size: 28px; font-weight: 900; color: var(--text); font-family: 'Orbitron', sans-serif; }
+.overview-card .ov-lbl { font-size: 9px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; font-family: 'Share Tech Mono', monospace; }
+
+.overview-card.green { border-color: var(--green); background: rgba(88,204,2,0.1); }
+.overview-card.green .ov-val { color: var(--green); }
+.overview-card.yellow { border-color: var(--yellow); background: rgba(255,200,0,0.1); }
+.overview-card.yellow .ov-val { color: var(--yellow); }
+.overview-card.blue { border-color: var(--blue); background: rgba(28,176,246,0.1); }
+.overview-card.blue .ov-val { color: var(--blue); }
+
+/* ════════════════════════════════════
+   LESSON CARDS GRID
+════════════════════════════════════ */
+.lessons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.lesson-card {
+  background: #2a2d35;
+  border: 2px solid var(--gray-medium);
+  border-radius: 20px;
+  padding: 24px;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  box-shadow: var(--shadow-sm);
+}
+
+.lesson-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.lesson-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 20px 20px 0 0;
+}
+
+.lesson-card[data-color="blue"]::before { background: var(--blue); }
+.lesson-card[data-color="red"]::before { background: var(--red); }
+.lesson-card[data-color="purple"]::before { background: var(--purple); }
+.lesson-card[data-color="teal"]::before { background: var(--teal); }
+.lesson-card[data-color="orange"]::before { background: var(--orange); }
+.lesson-card[data-color="green"]::before { background: var(--green); }
+
+.lesson-card[data-color="blue"]:hover { border-color: var(--blue); background: #2e3240; }
+.lesson-card[data-color="red"]:hover { border-color: var(--red); background: #3a2d2d; }
+.lesson-card[data-color="purple"]:hover { border-color: var(--purple); background: #302d3a; }
+.lesson-card[data-color="teal"]:hover { border-color: var(--teal); background: #2a3535; }
+.lesson-card[data-color="orange"]:hover { border-color: var(--orange); background: #3a3028; }
+.lesson-card[data-color="green"]:hover { border-color: var(--green); background: #2a3528; }
+
+.lesson-card-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.lesson-icon-wrap {
+  width: 54px; height: 54px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+
+.lesson-card[data-color="blue"] .lesson-icon-wrap { background: var(--blue-light); }
+.lesson-card[data-color="red"] .lesson-icon-wrap { background: var(--red-light); }
+.lesson-card[data-color="purple"] .lesson-icon-wrap { background: var(--purple-light); }
+.lesson-card[data-color="teal"] .lesson-icon-wrap { background: var(--teal-light); }
+.lesson-card[data-color="orange"] .lesson-icon-wrap { background: var(--orange-light); }
+.lesson-card[data-color="green"] .lesson-icon-wrap { background: var(--green-light); }
+
+.lesson-stars { display: flex; gap: 3px; }
+.lstar { font-size: 18px; color: var(--gray-medium); }
+.lstar.filled { color: var(--yellow); }
+
+.lesson-card-title {
+  font-size: 13px; font-weight: 700; color: var(--text);
+  margin-bottom: 8px; line-height: 1.4;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+.lesson-card-desc {
+  font-size: 11px; color: var(--text-light);
+  line-height: 1.7; margin-bottom: 18px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.lesson-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.lesson-meta {
+  display: flex; gap: 12px;
+}
+
+.lesson-pill {
+  font-size: 10px;
+  padding: 4px 10px; border-radius: 20px;
+  background: var(--gray-light); color: var(--text-light);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.lesson-progress-bar {
+  height: 6px; background: var(--gray-medium);
+  border-radius: 99px; margin-top: 16px; overflow: hidden;
+}
+
+.lesson-progress-fill {
+  height: 100%; border-radius: 99px;
+  transition: width 0.5s ease;
+}
+
+.lesson-card[data-color="blue"] .lesson-progress-fill { background: var(--blue); }
+.lesson-card[data-color="red"] .lesson-progress-fill { background: var(--red); }
+.lesson-card[data-color="purple"] .lesson-progress-fill { background: var(--purple); }
+.lesson-card[data-color="teal"] .lesson-progress-fill { background: var(--teal); }
+.lesson-card[data-color="orange"] .lesson-progress-fill { background: var(--orange); }
+.lesson-card[data-color="green"] .lesson-progress-fill { background: var(--green); }
+
+.badge-new {
+  background: var(--red); color: white;
+  font-size: 9px;
+  padding: 3px 9px; border-radius: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.badge-done {
+  background: var(--green-light); color: var(--green-dark);
+  font-size: 9px;
+  padding: 3px 9px; border-radius: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* ════════════════════════════════════
+   QUIZ OVERLAY
+════════════════════════════════════ */
+#quiz-screen {
+  position: fixed; inset: 0;
+  background: rgba(15, 25, 50, 0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 200; padding: 20px;
+}
+
+#quiz-screen.active { display: flex; }
+
+.quiz-modal {
+  background: #2a2d35; border-radius: 24px;
+  width: 100%; max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column;
+}
+
+.quiz-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 24px 16px;
+  border-bottom: 2px solid var(--gray-medium);
+  position: sticky; top: 0; background: #2a2d35;
+  border-radius: 24px 24px 0 0; z-index: 1;
+}
+
+.quiz-lesson-label {
+  font-size: 10px; color: var(--text-light);
+  text-transform: uppercase; letter-spacing: 2px;
+  white-space: nowrap;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.btn-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--gray); font-size: 18px; padding: 6px;
+  border-radius: 8px; transition: color 0.15s, background 0.15s;
+  line-height: 1; min-width: 34px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.btn-close:hover { color: var(--red); background: var(--red-light); }
+
+.progress-bar-wrap {
+  flex: 1; height: 14px;
+  background: var(--gray-medium);
+  border-radius: 99px; overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green) 0%, #7bda09 100%);
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.hearts-display {
+  font-size: 13px; color: var(--red);
+  display: flex; align-items: center; gap: 3px;
+  white-space: nowrap;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.quiz-body {
+  padding: 32px 28px 20px;
+  display: flex; flex-direction: column; gap: 18px;
+  flex: 1;
+}
+
+.q-type-tag {
+  font-size: 10px; text-transform: uppercase;
+  color: var(--blue); letter-spacing: 3px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.q-text {
+  font-size: 17px; font-weight: 700; color: var(--text);
+  line-height: 1.6;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.q-hint {
+  font-size: 12px; color: var(--gray);
+  font-style: italic;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Choices */
+.choices-grid { display: grid; gap: 11px; }
+
+.choice-btn {
+  background: #33363f;
+  border: 2.5px solid var(--gray-medium);
+  border-radius: 14px; padding: 14px 18px;
+  text-align: left; cursor: pointer;
+  font-size: 12px; color: var(--text);
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.5px; width: 100%;
+  line-height: 1.5;
+}
+
+.choice-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.15); transform: scale(1.01); }
+.choice-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+.choice-btn.correct  { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+.choice-btn.wrong    { border-color: var(--red);   background: var(--red-light);   color: var(--red); }
+.choice-btn:disabled { cursor: not-allowed; }
+
+.choice-letter {
+  width: 30px; height: 30px; min-width: 30px;
+  border: 2.5px solid var(--gray-medium); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--gray);
+  transition: border-color 0.15s, color 0.15s;
+  font-family: 'Orbitron', sans-serif; font-weight: 700;
+}
+
+.choice-btn.selected .choice-letter { border-color: var(--blue); color: var(--blue); }
+.choice-btn.correct  .choice-letter { border-color: var(--green); color: var(--green-dark); }
+.choice-btn.wrong    .choice-letter { border-color: var(--red);   color: var(--red); }
+
+/* True/False */
+.tf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.tf-btn {
+  background: #33363f; border: 2.5px solid var(--gray-medium);
+  border-radius: 16px; padding: 22px 16px;
+  cursor: pointer; font-size: 14px; font-weight: 700; color: var(--text);
+  transition: all 0.15s; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+}
+
+.tf-btn .tf-icon { font-size: 32px; }
+.tf-btn:hover:not(:disabled) { transform: scale(1.03); }
+.tf-btn.true-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.15); }
+.tf-btn.false-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.15); }
+.tf-btn.correct { border-color: var(--green); background: var(--green-light); }
+.tf-btn.wrong   { border-color: var(--red);   background: var(--red-light); }
+.tf-btn:disabled { cursor: not-allowed; }
+
+/* Fill-in */
+.fill-input {
+  border: 2.5px solid var(--gray-medium); border-radius: 14px;
+  padding: 14px 18px; font-size: 14px; color: var(--text);
+  outline: none; transition: border-color 0.15s; width: 100%;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+  background: #33363f;
+  color: var(--text);
+}
+
+.fill-input:focus { border-color: var(--blue); }
+.fill-input.correct { border-color: var(--green); background: var(--green-light); }
+.fill-input.wrong   { border-color: var(--red);   background: var(--red-light); }
+
+/* Footer action */
+.quiz-footer {
+  padding: 8px 28px 24px;
+}
+
+.btn-check {
+  background: var(--gray-medium); color: var(--gray);
+  border: none; border-radius: 12px;
+  padding: 15px 32px; font-size: 13px;
+  cursor: not-allowed; width: 100%;
+  font-family: 'Orbitron', sans-serif; letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.btn-check.ready {
+  background: var(--blue); color: white; cursor: pointer;
+  box-shadow: 0 4px 0 var(--blue-dark);
+}
+
+.btn-check.ready:hover { filter: brightness(1.06); }
+.btn-check.ready:active { transform: translateY(4px); box-shadow: none; }
+
+/* Feedback */
+.feedback-panel {
+  padding: 20px 28px 28px;
+  border-top: 2px solid transparent;
+}
+
+.feedback-panel.correct-panel { background: var(--green-light); border-color: var(--green); }
+.feedback-panel.wrong-panel   { background: var(--red-light);   border-color: var(--red); }
+
+.feedback-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.feedback-icon { font-size: 22px; }
+.feedback-title { font-size: 14px; font-family: 'Orbitron', sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.correct-panel .feedback-title { color: var(--green-dark); }
+.wrong-panel   .feedback-title { color: var(--red); }
+
+.feedback-explanation {
+  font-size: 12px; color: #000000;
+  line-height: 1.7; margin-bottom: 16px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.feedback-explanation strong { font-family: 'Orbitron', sans-serif; font-size: 11px; letter-spacing: 0.5px; }
+
+.btn-continue {
+  border: none; border-radius: 12px; padding: 15px 32px;
+  font-size: 13px; cursor: pointer; width: 100%;
+  font-family: 'Orbitron', sans-serif; letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: filter 0.1s, transform 0.1s, box-shadow 0.1s;
+}
+
+.correct-panel .btn-continue { background: var(--green); color: white; box-shadow: 0 4px 0 var(--green-dark); }
+.wrong-panel   .btn-continue { background: var(--red);   color: white; box-shadow: 0 4px 0 #cc0000; }
+.btn-continue:hover { filter: brightness(1.06); }
+.btn-continue:active { transform: translateY(4px); box-shadow: none; }
+
+/* ════════════════════════════════════
+   COMPLETE MODAL
+════════════════════════════════════ */
+#complete-screen {
+  position: fixed; inset: 0;
+  background: rgba(15, 25, 50, 0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 300; padding: 20px;
+}
+
+#complete-screen.active { display: flex; }
+
+.complete-modal {
+  background: #2a2d35; border-radius: 24px;
+  width: 100%; max-width: 480px;
+  padding: 44px 36px; text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.trophy-anim { font-size: 72px; margin-bottom: 16px; display: block; animation: popIn 0.6s ease; }
+
+@keyframes popIn {
+  0%   { transform: scale(0.2); opacity: 0; }
+  60%  { transform: scale(1.2); }
+  80%  { transform: scale(0.92); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.complete-modal h2 { font-size: 20px; font-weight: 900; color: var(--text); margin-bottom: 8px; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+.complete-modal > p { font-size: 12px; color: var(--text-light); margin-bottom: 28px; font-family: 'Share Tech Mono', monospace; letter-spacing: 0.5px; }
+
+.result-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+
+.rstat {
+  background: #33363f; border: 2px solid var(--gray-medium);
+  border-radius: 16px; padding: 18px 8px;
+}
+
+.rstat .rv { font-size: 20px; font-weight: 900; color: var(--text); font-family: 'Orbitron', sans-serif; }
+.rstat .rl { font-size: 9px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; margin-top: 6px; font-family: 'Share Tech Mono', monospace; }
+.rstat.green { background: var(--green-light); border-color: var(--green); }
+.rstat.green .rv { color: var(--green-dark); }
+
+.btn-primary {
+  background: var(--green); color: white; border: none;
+  border-radius: 12px; padding: 15px 32px;
+  font-size: 13px; cursor: pointer; width: 100%;
+  box-shadow: 0 4px 0 var(--green-dark);
+  font-family: 'Orbitron', sans-serif; letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: filter 0.1s, transform 0.1s, box-shadow 0.1s;
+  margin-bottom: 10px;
+}
+
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-primary:active { transform: translateY(4px); box-shadow: none; }
+
+.btn-secondary {
+  background: #33363f; color: var(--blue);
+  border: 2.5px solid var(--blue);
+  border-radius: 12px; padding: 13px 32px;
+  font-size: 12px; cursor: pointer; width: 100%;
+  font-family: 'Orbitron', sans-serif; transition: background 0.15s;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.btn-secondary:hover { background: var(--blue-light); }
+
+/* ════════════════════════════════════
+   XP POP
+════════════════════════════════════ */
+.xp-pop {
+  position: fixed; top: 28%; left: 50%; transform: translateX(-50%);
+  background: var(--yellow); color: #7a4c00;
+  font-size: 14px;
+  padding: 10px 24px; border-radius: 40px;
+  box-shadow: var(--shadow-md); pointer-events: none;
+  animation: xpFly 1.3s ease forwards; z-index: 999;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+}
+
+@keyframes xpFly {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.8); }
+  20%  { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.1); }
+  80%  { opacity: 1; transform: translateX(-50%) translateY(-40px) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-70px) scale(0.9); }
+}
+
+/* ════════════════════════════════════
+   SHAKE
+════════════════════════════════════ */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60%  { transform: translateX(-8px); }
+  40%, 80%  { transform: translateX(8px); }
+}
+
+.shake { animation: shake 0.4s ease; }
+
+/* ════════════════════════════════════
+   DIFFICULTY PICKER
+════════════════════════════════════ */
+#difficulty-screen {
+  position: fixed; inset: 0;
+  background: rgba(15, 25, 50, 0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 200; padding: 20px;
+}
+#difficulty-screen.active { display: flex; }
+
+.diff-btn {
+  background: #33363f;
+  border: 2px solid var(--gray-medium);
+  border-radius: 14px; padding: 16px 18px;
+  cursor: pointer; width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  text-align: left;
+}
+
+.diff-btn:hover { transform: translateY(-2px); }
+.easy-btn:hover     { border-color: var(--green);  background: rgba(88,204,2,0.1); }
+.moderate-btn:hover { border-color: var(--yellow); background: rgba(255,200,0,0.1); }
+.hard-btn:hover     { border-color: var(--red);    background: rgba(255,75,75,0.1); }
+
+.diff-left  { display: flex; align-items: center; gap: 14px; }
+.diff-right { text-align: right; }
+
+.diff-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+}
+
+.easy-badge     { background: rgba(88,204,2,0.15);   color: var(--green);  border: 1px solid var(--green); }
+.moderate-badge { background: rgba(255,200,0,0.15);  color: var(--yellow); border: 1px solid var(--yellow); }
+.hard-badge     { background: rgba(255,75,75,0.15);  color: var(--red);    border: 1px solid var(--red); }
+
+.diff-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 3px;
+}
+
+.diff-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--text-light); line-height: 1.5;
+}
+
+.diff-xp {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--yellow);
+  letter-spacing: 1px;
+}
+
+.diff-cap {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--text-light); margin-top: 3px;
+}
+
+/* Tier pips on lesson cards */
+.tier-pip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 700;
+  background: #33363f; color: var(--text-light);
+  border: 1.5px solid var(--gray-medium);
+}
+
+.tier-easy-done     { background: rgba(88,204,2,0.15);  color: var(--green);  border-color: var(--green); }
+.tier-mod-done      { background: rgba(255,200,0,0.15); color: var(--yellow); border-color: var(--yellow); }
+.tier-hard-done     { background: rgba(255,75,75,0.15); color: var(--red);    border-color: var(--red); }
+
+/* ════════════════════════════════════
+   LEVEL CARD
+════════════════════════════════════ */
+.level-card {
+  background: #2a2d35; border-radius: 18px;
+  padding: 20px 20px 16px;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid rgba(255,200,0,0.3);
+  grid-column: span 2;
+}
+
+@media (max-width: 600px) { .level-card { grid-column: span 1; } }
+
+.level-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.level-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px; font-weight: 900; color: var(--yellow);
+  letter-spacing: 2px;
+}
+
+.level-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px; color: var(--text-light); letter-spacing: 2px; text-transform: uppercase;
+}
+
+.level-xp-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--text-light); letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.level-bar-wrap {
+  height: 8px; background: var(--gray-medium);
+  border-radius: 99px; overflow: hidden; margin-top: 8px;
+}
+
+.level-bar-fill {
+  height: 100%; background: linear-gradient(90deg, var(--yellow), #ffaa00);
+  border-radius: 99px; transition: width 0.6s ease;
+}
+
+/* XP cap note in quiz */
+.xp-cap-note {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--text-light);
+  text-align: center; padding: 6px 0 0;
+  letter-spacing: 1px;
+}
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.5);
+  text-align: center; padding: 28px 32px;
+  font-size: 11px; margin-top: 40px;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.site-footer strong { color: white; }
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-inner { padding: 0 16px; }
+  .nav-links { display: none; }
+  .main-container { padding: 32px 16px; }
+  .hero { padding: 48px 16px 56px; }
+  .lessons-grid { grid-template-columns: 1fr; }
+  .quiz-body { padding: 24px 18px 16px; }
+  .quiz-footer, .feedback-panel { padding-left: 18px; padding-right: 18px; }
+  .q-text { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ NAVBAR ════════ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="scrollToLessons()">
+      <svg class="nav-lock-icon" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="18" width="30" height="22" rx="3" fill="none" stroke="#39ff14" stroke-width="1.8"/>
+        <path d="M12 18V13C12 7.5 28 7.5 28 13V18" stroke="#39ff14" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <rect x="8" y="21" width="24" height="16" rx="2" fill="rgba(57,255,20,0.08)"/>
+        <circle cx="20" cy="28" r="3" fill="none" stroke="#39ff14" stroke-width="1.5"/>
+        <line x1="20" y1="31" x2="20" y2="35" stroke="#39ff14" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span class="logo-secure">SECURE</span>
+        <span class="logo-sense">SENSE</span>
+        <span class="logo-tagline">Cyber Intelligence Quiz</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="scrollToLessons()">Lessons</button>
+      <button class="nav-link" onclick="scrollToProgress()">My Progress</button>
+    </div>
+    <div class="nav-stats">
+      <div class="nav-stat xp">⚡ <span id="nav-xp">0</span> XP</div>
+      <div class="nav-stat streak">🔥 <span id="nav-streak">0</span></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════ HOME SCREEN ════════ -->
+<div id="home-screen" class="screen active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🛡️ Cybersecurity Awareness Training</div>
+      <h1>Stay Safe in a <span>Digital World</span></h1>
+      <p>Learn essential cybersecurity skills through short, interactive lessons. Protect yourself, your data, and your organisation.</p>
+      <div class="hero-actions">
+        <button class="btn-hero" onclick="scrollToLessons()">🚀 Start Learning</button>
+        <button class="btn-hero-outline" onclick="scrollToProgress()">View Progress</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">10</div><div class="lbl">Lesson Modules</div></div>
+        <div class="hero-stat"><div class="num">30</div><div class="lbl">Questions</div></div>
+        <div class="hero-stat"><div class="num">3</div><div class="lbl">Question Types</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="main-container">
+
+    <!-- Progress Overview -->
+    <div id="progress-section">
+      <div class="section-header">
+        <h2>📊 Your Progress</h2>
+        <p>Track your learning streak and XP across all modules</p>
+      </div>
+      <div class="overview-grid">
+        <div class="overview-card green">
+          <div class="ov-icon">⚡</div>
+          <div class="ov-val" id="ov-xp">0</div>
+          <div class="ov-lbl">Total XP</div>
+        </div>
+        <div class="overview-card yellow">
+          <div class="ov-icon">🔥</div>
+          <div class="ov-val" id="ov-streak">0</div>
+          <div class="ov-lbl">Day Streak</div>
+        </div>
+        <div class="overview-card blue">
+          <div class="ov-icon">🏆</div>
+          <div class="ov-val" id="ov-lessons">0</div>
+          <div class="ov-lbl">Lessons Done</div>
+        </div>
+        <div class="overview-card">
+          <div class="ov-icon">⭐</div>
+          <div class="ov-val" id="ov-stars">0</div>
+          <div class="ov-lbl">Stars Earned</div>
+        </div>
+        <div class="level-card">
+          <div class="level-header">
+            <div>
+              <div class="level-badge" id="ov-level-val">LV1</div>
+              <div class="level-title" id="ov-level-title">Recruit</div>
+            </div>
+            <div style="text-align:right; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-light);">LEVEL PROGRESS</div>
+          </div>
+          <div class="level-bar-wrap">
+            <div class="level-bar-fill" id="ov-level-bar" style="width:0%"></div>
+          </div>
+          <div class="level-xp-text" id="ov-level-next">0 / 50 XP → Cadet</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lessons -->
+    <div id="lessons-section">
+      <div class="section-header">
+        <h2>🎓 Lesson Modules</h2>
+        <p>Complete each module to earn XP and stars — revisit any time to improve your score</p>
+      </div>
+      <div class="lessons-grid" id="lessons-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <strong>SECURE</strong><strong style="color:#7dd9f5;">SENSE</strong> · Cybersecurity Awareness Training · Built to keep you safe online
+  </footer>
+
+</div>
+
+<!-- ════════ QUIZ OVERLAY ════════ -->
+<div id="quiz-screen" class="screen">
+  <div class="quiz-modal" id="quiz-modal">
+    <div class="quiz-header">
+      <button class="btn-close" onclick="closeQuiz()">✕</button>
+      <div class="quiz-lesson-label" id="quiz-lesson-label">Module</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+      <div class="hearts-display" id="hearts-display">❤️ <span id="hearts-count">3</span></div>
+    </div>
+
+    <div class="quiz-body" id="quiz-body"></div>
+
+    <div class="quiz-footer" id="quiz-footer">
+      <button class="btn-check" id="check-btn" onclick="checkAnswer()">CHECK</button>
+    </div>
+
+    <div class="feedback-panel" id="feedback-panel" style="display:none">
+      <div class="feedback-head">
+        <span class="feedback-icon" id="fb-icon"></span>
+        <span class="feedback-title" id="fb-title"></span>
+      </div>
+      <div class="feedback-explanation" id="fb-explanation"></div>
+      <button class="btn-continue" id="btn-continue" onclick="nextQuestion()">CONTINUE</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ COMPLETE MODAL ════════ -->
+<div id="complete-screen" class="screen">
+  <div class="complete-modal">
+    <span class="trophy-anim" id="complete-trophy">🏆</span>
+    <h2 id="complete-title">Lesson Complete!</h2>
+    <p id="complete-subtitle">Great work — keep it up!</p>
+    <div class="result-stats">
+      <div class="rstat green"><div class="rv" id="final-xp">+0</div><div class="rl">XP Earned</div></div>
+      <div class="rstat"><div class="rv" id="final-accuracy">0%</div><div class="rl">Accuracy</div></div>
+      <div class="rstat"><div class="rv" id="final-rating">⭐</div><div class="rl">Rating</div></div>
+    </div>
+    <div id="level-up-banner" style="display:none; background:rgba(255,200,0,0.15); border:2px solid #ffc800; border-radius:12px; padding:12px 16px; margin-bottom:16px; text-align:center;">
+      <div style="font-family:'Orbitron',sans-serif; font-size:13px; color:#ffc800; letter-spacing:2px;">⚡ LEVEL UP!</div>
+      <div id="level-up-text" style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#9aa0b0; margin-top:4px;"></div>
+    </div>
+    <button class="btn-primary" onclick="finishLesson()">🏠 Back to Lessons</button>
+    <button class="btn-secondary" onclick="retryLesson()">🔄 Try Again</button>
+  </div>
+</div>
+
+<!-- Difficulty picker removed - lessons start directly -->
+
+<!-- ════════ VOCABULARY PRACTICE (Earn Hearts) ════════ -->
+<div id="vocab-screen" class="screen">
+  <div class="quiz-modal" style="max-width:520px;">
+    <div class="quiz-header">
+      <button class="btn-close" onclick="closeVocab()">✕</button>
+      <div class="quiz-lesson-label">Vocabulary Practice</div>
+      <div style="flex:1"></div>
+      <div class="hearts-display">❤️ <span id="vocab-hearts-count">0</span></div>
+    </div>
+    <div style="padding:28px 28px 20px;">
+      <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:700; color:var(--text); letter-spacing:1px; margin-bottom:8px; text-align:center;">💔 Out of Hearts!</div>
+      <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--text-light); margin-bottom:20px; line-height:1.6; text-align:center;">Practice cybersecurity vocabulary to earn hearts back. Match 5 terms correctly to restore all hearts!</div>
+      
+      <div style="background:#33363f; border-radius:12px; padding:16px; margin-bottom:16px;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:11px; color:var(--text-light); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;">Term</div>
+        <div id="vocab-term" style="font-family:'Orbitron',sans-serif; font-size:18px; font-weight:700; color:var(--text); letter-spacing:1px; margin-bottom:16px;"></div>
+        
+        <div style="font-family:'Orbitron',sans-serif; font-size:11px; color:var(--text-light); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;">Select Definition</div>
+        <div id="vocab-choices" style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+      
+      <div id="vocab-feedback" style="display:none; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-family:'Share Tech Mono',monospace; font-size:11px; text-align:center;"></div>
+      
+      <div style="text-align:center; font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--text-light);">
+        Progress: <span id="vocab-progress" style="color:var(--green); font-weight:700;">0/5</span> correct
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+#vocab-screen {
+  position: fixed; inset: 0;
+  background: rgba(15, 25, 50, 0.85);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 250; padding: 20px;
+}
+#vocab-screen.active { display: flex; }
+
+.vocab-choice-btn {
+  background: #2a2d35; border: 2px solid var(--gray-medium);
+  border-radius: 10px; padding: 12px 16px;
+  cursor: pointer; font-family: 'Share Tech Mono', monospace;
+  font-size: 11px; color: var(--text); line-height: 1.5;
+  transition: all 0.15s; text-align: left;
+}
+.vocab-choice-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.1); transform: translateX(4px); }
+.vocab-choice-btn.correct { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+.vocab-choice-btn.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.vocab-choice-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+</style>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  XP LEVEL SYSTEM
+// ══════════════════════════════════════════════════════════════════
+
+const LEVELS = [
+  { level: 1,  title: "Recruit",         minXP: 0   },
+  { level: 2,  title: "Cadet",           minXP: 50  },
+  { level: 3,  title: "Analyst",         minXP: 150 },
+  { level: 4,  title: "Specialist",      minXP: 300 },
+  { level: 5,  title: "Investigator",    minXP: 500 },
+  { level: 6,  title: "Senior Analyst",  minXP: 750 },
+  { level: 7,  title: "Threat Hunter",   minXP: 1100 },
+  { level: 8,  title: "Operator",        minXP: 1500 },
+  { level: 9,  title: "Architect",       minXP: 2000 },
+  { level: 10, title: "Elite Defender",  minXP: 2600 },
+];
+
+const XP_CAPS = { easy: 5, moderate: 10, hard: 20 };
+const XP_PER_Q = { easy: 5, moderate: 10, hard: 20 }; // 3 correct = cap
+
+function getLevel(xp) {
+  let lvl = LEVELS[0];
+  for (const l of LEVELS) { if (xp >= l.minXP) lvl = l; }
+  return lvl;
+}
+
+function getNextLevel(xp) {
+  for (const l of LEVELS) { if (xp < l.minXP) return l; }
+  return null;
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  VOCABULARY PRACTICE DATABASE
+// ══════════════════════════════════════════════════════════════════
+
+const VOCAB_TERMS = [
+  { term: "Phishing", definition: "Fraudulent attempt to obtain sensitive information by disguising as a trustworthy entity", wrong: ["Encrypting email messages", "Scanning for network vulnerabilities", "Updating antivirus software"] },
+  { term: "Malware", definition: "Malicious software designed to harm, exploit, or gain unauthorized access to systems", wrong: ["A type of firewall protection", "Legitimate system updates", "Email encryption protocol"] },
+  { term: "Two-Factor Authentication", definition: "Security process requiring two different verification factors to confirm identity", wrong: ["Using two different passwords", "Logging in from two devices", "Having two email accounts"] },
+  { term: "Firewall", definition: "Network security system that monitors and controls incoming and outgoing network traffic", wrong: ["Antivirus scanning software", "Password manager application", "Email filtering service"] },
+  { term: "Encryption", definition: "Process of converting information into a secret code to prevent unauthorized access", wrong: ["Backing up files to the cloud", "Deleting sensitive information", "Scanning for viruses"] },
+  { term: "VPN", definition: "Virtual Private Network that creates an encrypted tunnel for your internet connection", wrong: ["Virus Protection Network for computers", "Video Processing Node for streaming", "Virtual Password Navigator"] },
+  { term: "Ransomware", definition: "Malware that encrypts files and demands payment for decryption", wrong: ["Software that manages passwords", "Tool for backing up data", "Program that speeds up computers"] },
+  { term: "Social Engineering", definition: "Manipulating people into divulging confidential information or performing actions", wrong: ["Managing social media accounts", "Networking with colleagues", "Building professional relationships"] },
+  { term: "Trojan Horse", definition: "Malware disguised as legitimate software to trick users into installing it", wrong: ["A type of strong password", "Network monitoring tool", "Email spam filter"] },
+  { term: "SSL/TLS", definition: "Protocols that provide encrypted communications over a network (HTTPS)", wrong: ["Social Security Login system", "Server Storage Location", "Secure System Lockdown"] },
+  { term: "Botnet", definition: "Network of compromised computers controlled remotely by attackers", wrong: ["Automated backup network", "Legitimate distributed computing", "Social media automation tool"] },
+  { term: "Zero-Day Exploit", definition: "Attack that targets a previously unknown vulnerability before a patch is available", wrong: ["First day of a new security policy", "Clearing security logs daily", "Resetting passwords to default"] },
+  { term: "Spear Phishing", definition: "Targeted phishing attack personalized for a specific individual or organization", wrong: ["Fishing for network vulnerabilities", "Generic email spam campaign", "Automated password guessing"] },
+  { term: "DDoS Attack", definition: "Overwhelming a system with traffic from multiple sources to make it unavailable", wrong: ["Deleting data from hard drives", "Deploying new software updates", "Detecting duplicate files"] },
+  { term: "Man-in-the-Middle", definition: "Attacker secretly intercepts and relays communications between two parties", wrong: ["Network administrator monitoring traffic", "Mediator in business negotiations", "Customer service representative"] },
+  { term: "Biometric Authentication", definition: "Using unique physical characteristics like fingerprints or face recognition for identity verification", wrong: ["Using biographical information as passwords", "Two different password requirements", "Medical records database access"] },
+  { term: "Rootkit", definition: "Malware designed to hide its presence and maintain privileged access to a computer", wrong: ["Administrative login credentials", "Root directory of file system", "Plant-based network structure"] },
+  { term: "Keylogger", definition: "Software that records every keystroke to capture passwords and sensitive information", wrong: ["Keyboard shortcut manager", "Typing speed measurement tool", "Lock screen security feature"] },
+  { term: "Sandbox", definition: "Isolated environment for testing untrusted programs or code safely", wrong: ["Beach-themed computer game", "Temporary storage location", "Social media testing group"] },
+  { term: "Patch", definition: "Software update that fixes vulnerabilities or bugs in a program", wrong: ["Network cable connector", "Quick temporary solution only", "Hardware repair kit"] }
+];
+
+let vocabState = {
+  correctCount: 0,
+  currentTerm: null,
+  usedTerms: [],
+  answered: false
+};
+
+// ══════════════════════════════════════════════════════════════════
+//  LESSON DATA  (easy / moderate / hard tiers per lesson)
+// ══════════════════════════════════════════════════════════════════
+
+const LESSONS = [
+  {
+    title: "Phishing Attacks", icon: "🎣", color: "blue", minLevel: 5,
+    desc: "Learn to identify and avoid phishing emails, fake websites, and deceptive links designed to steal your information.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Phishing emails are always easy to spot because they contain obvious spelling mistakes.", correct:false,
+        explanation:"<strong>FALSE.</strong> Modern phishing emails are often professionally crafted with correct grammar, real logos, and convincing layouts. Never assume an email is safe just because it looks polished." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is phishing?", choices:["A type of computer virus","A fraudulent attempt to steal sensitive info by pretending to be trustworthy","A method of encrypting emails","A network scanning technique"], correct:1,
+        explanation:"<strong>Phishing</strong> is a social engineering attack where criminals impersonate trusted entities (banks, employers, services) via email, SMS, or calls to trick you into handing over passwords or personal data." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"You should never click links in emails that ask you to 'verify your account' urgently.", correct:true,
+        explanation:"<strong>TRUE.</strong> Urgent account verification requests are a classic phishing red flag. Navigate directly to the official website by typing the URL yourself rather than clicking the link." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which of the following is the most reliable way to verify a suspicious email from your bank?", choices:["Reply and ask if it's real","Click the link and check the site","Call your bank on their official number","Forward it to a friend"], correct:2,
+        explanation:"Always <strong>contact the organisation directly</strong> using contact details from their official website — not from the suspicious email. Replying or clicking links in phishing emails hands over your credentials." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"You receive: 'Your account will be SUSPENDED in 24 hours — click here immediately!' What technique is this?", choices:["Baiting","Urgency and fear tactics","Watering hole attack","Tailgating"], correct:1,
+        explanation:"<strong>Urgency and fear</strong> are classic social engineering tactics. Attackers create time pressure so victims act without thinking. Red flags include countdown threats, ALL CAPS, and demands to act immediately." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"A padlock (🔒) in your browser address bar means a website is safe and definitely not phishing.", correct:false,
+        explanation:"<strong>FALSE.</strong> HTTPS only confirms the connection is encrypted — not that the site is trustworthy. Phishing sites routinely use valid HTTPS certificates. Always verify the full domain name carefully." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Spear phishing differs from bulk phishing because it:", choices:["Only targets email inboxes","Is personalised using specific victim details","Spreads via USB drives","Requires physical access to the target"], correct:1,
+        explanation:"<strong>Spear phishing</strong> uses personal details (name, role, colleagues, recent events) to make attacks highly convincing. Unlike bulk campaigns, it's crafted specifically for you — making it far harder to detect." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which advanced phishing technique redirects users from a legitimate URL to a fake site by poisoning DNS records?", choices:["Spear phishing","Smishing","Pharming","Vishing"], correct:2,
+        explanation:"<strong>Pharming</strong> corrupts DNS resolution so that even typing the correct URL takes you to a fake site. Unlike phishing, it doesn't rely on the victim clicking a malicious link — making it especially dangerous." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Business Email Compromise (BEC) attacks typically impersonate senior executives to trick employees into transferring funds.", correct:true,
+        explanation:"<strong>TRUE.</strong> BEC attacks impersonate CEOs, CFOs or suppliers to approve urgent wire transfers. These attacks cause billions in losses annually. Always verify payment requests via a separate confirmed channel." }
+    ]
+  },
+  {
+    title: "Password Security", icon: "🔑", color: "green",
+    desc: "Master the art of creating strong passwords, using password managers, and enabling multi-factor authentication.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"'password123' is a weak password that should never be used.", correct:true,
+        explanation:"<strong>TRUE.</strong> 'password123' is one of the most commonly used passwords worldwide and appears in every brute-force dictionary. It would be cracked in under a second by modern tools." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which of these makes a password stronger?", choices:["Using your pet's name","Making it at least 16 characters with mixed symbols","Using your birthday","Keeping it short so it's easy to remember"], correct:1,
+        explanation:"<strong>Length and complexity</strong> are the biggest factors in password strength. 16+ characters with a mix of uppercase, lowercase, numbers, and symbols creates exponentially more possible combinations to brute-force." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"You should use a different password for every online account.", correct:true,
+        explanation:"<strong>TRUE.</strong> If one site is breached and you reuse passwords, attackers try those credentials everywhere (credential stuffing). Each account needs a unique password — this is where password managers help." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which of the following is the STRONGEST password?", choices:["Football1!","P@ssw0rd","Tr0ub4dor&3","iL0v3C@ts#9$mK!"], correct:3,
+        explanation:"<strong>iL0v3C@ts#9$mK!</strong> wins — it's long (16 characters) with a random mix of uppercase, lowercase, numbers, and symbols. Length and unpredictability are the most important factors in password strength." },
+      { type:"fillin", tag:"FILL IN THE BLANK", question:"A _______ manager securely stores and generates unique strong passwords for all your accounts.", hint:"Think of a tool that 'holds' all your credentials", correct:["password","password manager"],
+        explanation:"A <strong>password manager</strong> (e.g. Bitwarden, 1Password) encrypts your passwords so you only need to remember one master password. It also generates strong, unique passwords for every site." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is Multi-Factor Authentication (MFA)?", choices:["Logging in from multiple devices","Using two or more verification factors to confirm identity","Changing your password every 30 days","A backup password method"], correct:1,
+        explanation:"<strong>MFA</strong> combines two or more factors: something you <em>know</em> (password), something you <em>have</em> (phone), or something you <em>are</em> (fingerprint). Even if your password leaks, MFA blocks attackers." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which MFA method is most resistant to phishing attacks?", choices:["SMS one-time code","Email magic link","Hardware security key (FIDO2/WebAuthn)","Time-based authenticator app"], correct:2,
+        explanation:"<strong>Hardware security keys</strong> use FIDO2/WebAuthn — they're cryptographically bound to the exact legitimate domain. They cannot be intercepted or replayed on fake phishing sites, unlike SMS codes or TOTP apps." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"A bcrypt hash of a password can be reversed to reveal the original password if you have enough computing power.", correct:false,
+        explanation:"<strong>FALSE.</strong> Bcrypt is a one-way hashing algorithm — it cannot be reversed. Attackers must brute-force it by hashing millions of guesses and comparing results. Bcrypt's slow computation makes this extremely costly." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'credential stuffing' attack?", choices:["Guessing passwords using common word lists","Automatically testing leaked username/password pairs across many sites","Intercepting passwords in transit","Installing keyloggers to capture typed passwords"], correct:1,
+        explanation:"<strong>Credential stuffing</strong> takes leaked username/password pairs from one breach and automatically tests them across hundreds of other services. This is why password reuse is so dangerous — one breach compromises everything." }
+    ]
+  },
+  {
+    title: "Social Engineering", icon: "🎭", color: "purple",
+    desc: "Understand how attackers manipulate human psychology to bypass security — and how to recognise and resist these tactics.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Social engineering attacks rely on tricking people rather than exploiting technical vulnerabilities.", correct:true,
+        explanation:"<strong>TRUE.</strong> Social engineering exploits human psychology — trust, fear, urgency, authority — rather than software bugs. It's often the easiest attack vector because people are harder to 'patch' than systems." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Someone holds the office door open for you without badging in. This is an example of:", choices:["Phishing","Vishing","Tailgating","Baiting"], correct:2,
+        explanation:"<strong>Tailgating</strong> (piggybacking) is a physical social engineering technique where someone gains access to a restricted area by following an authorised person. Always challenge unknown individuals politely." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"It's safe to plug in a USB drive you found in the car park to see what's on it.", correct:false,
+        explanation:"<strong>FALSE.</strong> This is a <strong>baiting attack</strong>. USB drives found in public may contain malware that auto-executes the moment you plug them in. Hand unknown USB devices to IT security without plugging them in." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"An attacker calls pretending to be IT support and asks for your login credentials. This is called:", choices:["Phishing","Vishing","Smishing","Pharming"], correct:1,
+        explanation:"<strong>Vishing</strong> (Voice Phishing) uses phone calls to impersonate trusted figures. Legitimate IT teams will <em>never</em> ask for your password — not even via a helpdesk ticket. Always verify caller identity independently." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which psychological principle do social engineers most commonly exploit?", choices:["Curiosity","Authority, urgency, scarcity, and social proof","Technical knowledge","People's love of free things"], correct:1,
+        explanation:"Social engineers exploit core human biases: <strong>authority</strong> (impersonating bosses), <strong>urgency</strong> (act now!), <strong>scarcity</strong> (limited time!), and <strong>social proof</strong> (everyone else did it). Awareness is your best defence." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Pretexting involves creating a fabricated scenario to manipulate a victim into revealing sensitive information.", correct:true,
+        explanation:"<strong>TRUE.</strong> Pretexting means building a believable backstory — posing as a new employee, auditor, or vendor. Always verify identities through official channels before sharing any sensitive information." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"An attacker researches an employee on LinkedIn to craft a convincing impersonation email from their CEO. This combines:", choices:["Vishing and baiting","Spear phishing and pretexting","Smishing and tailgating","Pharming and pretexting"], correct:1,
+        explanation:"<strong>Spear phishing + pretexting</strong> is a devastating combination — using OSINT (open source intelligence) to build a convincing fake persona, then deploying it in a targeted email. LinkedIn is a goldmine for attackers." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"OSINT (Open Source Intelligence) can only be used by law enforcement and intelligence agencies.", correct:false,
+        explanation:"<strong>FALSE.</strong> OSINT is publicly available information gathered from websites, social media, public records, etc. Both attackers AND defenders use it. Your social media presence is a significant source of OSINT for attackers." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'watering hole' attack?", choices:["Poisoning a water supply","Compromising websites that a specific target group frequently visits","Intercepting emails mid-transit","Installing hardware keyloggers"], correct:1,
+        explanation:"A <strong>watering hole attack</strong> compromises websites that a target group regularly visits (industry forums, supplier portals). When victims visit, malware is silently delivered — bypassing email security entirely." }
+    ]
+  },
+  {
+    title: "Safe Browsing", icon: "🌐", color: "teal",
+    desc: "Discover how to browse the internet safely, protect your privacy, and use public Wi-Fi securely.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"It is safe to use public Wi-Fi for online banking without any extra precautions.", correct:false,
+        explanation:"<strong>FALSE.</strong> Public Wi-Fi is unencrypted and easily monitored. Anyone on the same network can intercept unprotected traffic. Always use a VPN on public Wi-Fi, especially for sensitive activities." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What does HTTPS in a URL mean?", choices:["The website is owned by a government","The connection between your browser and server is encrypted","The site has been virus-scanned","The website never collects data"], correct:1,
+        explanation:"<strong>HTTPS</strong> uses TLS encryption to protect data in transit. It does NOT mean the website is trustworthy — phishing sites use HTTPS too. It's a necessary but not sufficient security indicator." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Keeping your browser updated helps protect you from security vulnerabilities.", correct:true,
+        explanation:"<strong>TRUE.</strong> Browser updates patch known security vulnerabilities that attackers actively exploit. Enable automatic updates to ensure you always have the latest protections without needing to think about it." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"You're in a coffee shop. What's the safest approach for using public Wi-Fi?", choices:["Only visit sites you trust","Use a VPN to encrypt your connection","Avoid HTTPS sites","Turn off your firewall to improve speed"], correct:1,
+        explanation:"A <strong>VPN</strong> encrypts all your traffic, making it unreadable to anyone snooping on the same network. Public Wi-Fi is a hotspot for man-in-the-middle attacks — a VPN is your primary defence." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'drive-by download'?", choices:["Downloading while driving","Malware that installs automatically just by visiting a compromised site","A slow download due to poor connection","Downloading via USB"], correct:1,
+        explanation:"A <strong>drive-by download</strong> exploits browser or plugin vulnerabilities to install malware automatically — no click required. Keep your browser and plugins updated and consider a script-blocking extension." },
+      { type:"fillin", tag:"FILL IN THE BLANK", question:"A browser _______ blocks intrusive ads and can also prevent malicious ads (malvertising) from loading.", hint:"A tool that stops unwanted advertising content", correct:["adblocker","ad blocker","ad-blocker"],
+        explanation:"An <strong>ad blocker</strong> (like uBlock Origin) prevents ads from loading — including <em>malvertising</em> where ad networks serve malicious content. It significantly reduces your attack surface." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'man-in-the-middle' (MitM) attack?", choices:["An attacker physically standing between two people","An attacker intercepting and potentially altering communication between two parties","A type of brute-force attack","An attacker taking control of a DNS server"], correct:1,
+        explanation:"In a <strong>MitM attack</strong>, the attacker secretly relays and can alter communications between two parties. TLS/HTTPS and certificate pinning defend against this — which is why connecting to HTTPS sites over a VPN matters." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Browser fingerprinting can track you across websites even if you delete cookies.", correct:true,
+        explanation:"<strong>TRUE.</strong> Browser fingerprinting collects attributes like your browser version, screen resolution, fonts, plugins, and timezone to create a near-unique identifier — persistent across sessions and cookie deletion." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which HTTP response header helps prevent cross-site scripting (XSS) attacks?", choices:["Cache-Control","Content-Security-Policy (CSP)","Accept-Encoding","X-Forwarded-For"], correct:1,
+        explanation:"<strong>Content-Security-Policy (CSP)</strong> tells browsers which sources of scripts, styles, and media are legitimate — preventing injected malicious scripts from executing. It's one of the most powerful XSS mitigations." }
+    ]
+  },
+  {
+    title: "Malware & Downloads", icon: "🦠", color: "orange", minLevel: 5,
+    desc: "Understand malware types, how they spread through downloads, and how to keep your devices protected.",
+    easy: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is malware?", choices:["A slow internet connection","Software designed to harm, exploit, or gain unauthorised access","A type of firewall","An antivirus program"], correct:1,
+        explanation:"<strong>Malware</strong> (malicious software) is any software designed to damage, disrupt, or gain unauthorised access to systems. It includes viruses, trojans, ransomware, spyware, and more." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Antivirus software guarantees 100% protection against all malware.", correct:false,
+        explanation:"<strong>FALSE.</strong> Antivirus uses signature-based detection and can miss new, zero-day, or obfuscated threats. It's an important layer but should be combined with safe browsing habits, updates, and backups." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"The safest place to download software is:", choices:["Any site that appears in Google results","The developer's official website or trusted app store","Third-party 'free download' portals","Torrent websites"], correct:1,
+        explanation:"Always download from the <strong>official developer's website or a trusted app store</strong>. Third-party sites and torrents frequently bundle malware with legitimate software — even when the software itself works fine." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which malware type encrypts your files and demands payment to restore access?", choices:["Spyware","Adware","Ransomware","Rootkit"], correct:2,
+        explanation:"<strong>Ransomware</strong> encrypts files and demands payment (usually cryptocurrency). Regular offline backups are your best defence. Paying the ransom doesn't guarantee file recovery and funds further attacks." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"A file with a .pdf extension can never contain malware.", correct:false,
+        explanation:"<strong>FALSE.</strong> Malicious PDFs can exploit vulnerabilities in PDF readers to execute code. Word docs can contain harmful macros. Always be cautious with unexpected attachments, regardless of extension." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"A Trojan disguises itself as legitimate software to:", choices:["Speed up your computer","Trick you into installing it, then perform malicious actions","Automatically update your OS","Scan for viruses"], correct:1,
+        explanation:"Like the mythical wooden horse, a <strong>Trojan</strong> pretends to be useful software. Once installed, it can open backdoors, steal data, log keystrokes, or download additional malware — all without your knowledge." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What distinguishes a rootkit from other types of malware?", choices:["It only targets mobile devices","It is designed to maintain persistent, hidden privileged access at the OS level","It only steals passwords","It always arrives via email"], correct:1,
+        explanation:"A <strong>rootkit</strong> operates at the operating system kernel level to hide its presence and maintain persistent access. It can conceal files, processes, and network connections — making it extremely difficult to detect or remove." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Enabling macros in an Office document from an unknown sender is safe as long as antivirus is running.", correct:false,
+        explanation:"<strong>FALSE.</strong> Macro-based malware (like Emotet) is specifically designed to evade antivirus detection. Never enable macros in documents from unknown sources — this is one of the most common malware delivery methods." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"A botnet is best described as:", choices:["A network security monitoring tool","A collection of compromised machines controlled remotely by an attacker","A type of firewall architecture","An encrypted peer-to-peer network"], correct:1,
+        explanation:"A <strong>botnet</strong> is a network of malware-infected machines ('bots') controlled remotely through a Command & Control (C&C) server. Botnets power DDoS attacks, spam campaigns, credential stuffing, and crypto mining." }
+    ]
+  },
+  {
+    title: "Social Media Safety", icon: "📱", color: "red", minLevel: 5,
+    desc: "Protect your personal information on social media, spot scams, and manage your digital footprint.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"It's safe to share your full date of birth, home town, and phone number publicly on social media.", correct:false,
+        explanation:"<strong>FALSE.</strong> This information is used by attackers for identity theft, answering security questions, and crafting targeted phishing attacks. Limit what you share publicly — treat your profile like a shop window." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What should you do if you receive a message from an unknown account offering you a prize?", choices:["Click the link — it's probably real","Ignore and report it as a scam","Share it with friends","Reply with your details to claim it"], correct:1,
+        explanation:"Prize messages from unknown accounts are almost always <strong>scams</strong>. They lead to phishing sites or malware. Ignore and report them using the platform's reporting tool — never click the link." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Reviewing your privacy settings on social media is a good security habit.", correct:true,
+        explanation:"<strong>TRUE.</strong> Most platforms default to maximum data sharing. Regularly review privacy settings to control who sees your posts, finds your profile, and accesses your information. Tighten to friends/connections only." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Accepting friend requests from strangers on social media can be a security risk because:", choices:["It slows down your feed","Fake profiles gather intel for targeted attacks and access to your shared content","It violates platform terms","It reduces your engagement metrics"], correct:1,
+        explanation:"Fake profiles are used to gather intelligence for targeted attacks, access friend-only content, spread malware via messages, and build networks for scams. Only connect with people you know in real life." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"'Oversharing' on social media is a security risk because attackers can use personal details to:", choices:["Report your account","Guess passwords and answer your security questions","Improve their own profiles","Track your purchase history"], correct:1,
+        explanation:"<strong>Oversharing</strong> — pet names, schools, birthdays, favourite teams — fuels targeted attacks. Attackers use this information to guess passwords, answer security questions, and craft highly convincing phishing messages." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"A celebrity asking you to send cryptocurrency to receive a larger amount back is a well-known scam.", correct:true,
+        explanation:"<strong>TRUE.</strong> Crypto doubling/giveaway scams are rampant on social media, often using verified or hacked accounts. No legitimate person or entity will ever ask you to send crypto first to receive more back." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'social media OSINT' and why is it a threat?", choices:["A platform's advertising algorithm","Collecting publicly available information from profiles to build detailed intelligence on targets","A type of social media spam","Automated mass account creation"], correct:1,
+        explanation:"<strong>Social media OSINT</strong> involves aggregating public posts, connections, locations, and metadata to build detailed profiles for targeted attacks. Your public profile is a free intelligence report for anyone who looks." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Logging into third-party apps using 'Sign in with Facebook/Google' can expose your data if those apps are compromised.", correct:true,
+        explanation:"<strong>TRUE.</strong> OAuth tokens granted to third-party apps can be misused if those apps are breached or malicious. Regularly audit connected apps in your social media settings and revoke access to ones you no longer use." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"An attacker creates a fake LinkedIn profile of a senior employee and contacts junior staff requesting sensitive documents. This is:", choices:["Spear phishing via social media","A watering hole attack","DNS poisoning","A brute-force attack"], correct:0,
+        explanation:"This is <strong>spear phishing via social media</strong> — using a fake professional profile to establish false trust and exploit organisational hierarchy. Always verify identity through a second channel before sharing anything sensitive." }
+    ]
+  },
+  {
+    title: "Wi-Fi Network Safety", icon: "📡", color: "blue",
+    desc: "Learn to secure your home network, protect yourself on public Wi-Fi, and understand wireless security protocols.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Using the default password on your home Wi-Fi router is safe because it's unique to your device.", correct:false,
+        explanation:"<strong>FALSE.</strong> Default router passwords are publicly documented by manufacturer and model. Attackers can easily look them up. Always change your router's admin password immediately after setup." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What does WPA3 provide for your Wi-Fi network?", choices:["Faster internet speeds","Strong encryption to protect data transmitted over the network","Better signal range","Automatic software updates"], correct:1,
+        explanation:"<strong>WPA3</strong> is the latest Wi-Fi security protocol that encrypts data between your devices and router. It protects against eavesdropping and makes it much harder for attackers to crack your network password." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Hiding your Wi-Fi network name (SSID) provides strong security protection.", correct:false,
+        explanation:"<strong>FALSE.</strong> Hiding your SSID only provides 'security through obscurity' — attackers with basic tools can still detect hidden networks. Use WPA3 encryption and a strong password for real security." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is an 'evil twin' attack?", choices:["Two hackers working together","A fake Wi-Fi access point that mimics a legitimate one to intercept traffic","A virus that duplicates itself","A social engineering technique"], correct:1,
+        explanation:"An <strong>evil twin</strong> is a rogue Wi-Fi access point with the same name as a legitimate one. When you connect, attackers can intercept all your unencrypted traffic. Always verify network authenticity and use a VPN on public Wi-Fi." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"Which is more secure for your home Wi-Fi?", choices:["WEP encryption","WPA encryption","WPA2 encryption","Open network with MAC address filtering"], correct:2,
+        explanation:"<strong>WPA2</strong> (or WPA3 if available) provides strong encryption. WEP is easily cracked, WPA has known vulnerabilities, and MAC filtering can be bypassed. Always use the strongest encryption your router supports." },
+      { type:"fillin", tag:"FILL IN THE BLANK", question:"A _______ creates an encrypted tunnel between your device and the internet, protecting your data even on unsecured networks.", hint:"Three letters, commonly used for secure remote connections", correct:["vpn","VPN","virtual private network"],
+        explanation:"A <strong>VPN (Virtual Private Network)</strong> encrypts all your internet traffic before it leaves your device. This protects you from eavesdropping on public Wi-Fi, hides your browsing from your ISP, and masks your IP address." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'man-in-the-middle' attack on Wi-Fi networks?", choices:["An attacker physically standing between two routers","An attacker intercepting and potentially modifying traffic between your device and the router","A denial-of-service attack","A password guessing technique"], correct:1,
+        explanation:"In a Wi-Fi <strong>MitM attack</strong>, the attacker positions themselves between you and the router (or impersonates the router entirely). They can intercept, read, and modify unencrypted data. HTTPS and VPNs protect against this." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"WPA2's KRACK vulnerability allowed attackers to decrypt Wi-Fi traffic even on properly secured networks.", correct:true,
+        explanation:"<strong>TRUE.</strong> The KRACK (Key Reinstallation Attack) exploited a flaw in WPA2's four-way handshake. It highlighted that even strong protocols can have implementation flaws. Keep devices updated and upgrade to WPA3 when possible." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'wardriving'?", choices:["Driving while using a laptop","Scanning for Wi-Fi networks while moving through an area","A type of road rage involving technology","Hacking into cars' computer systems"], correct:1,
+        explanation:"<strong>Wardriving</strong> is the practice of driving around with Wi-Fi equipment to map networks, find unsecured access points, and identify vulnerable targets. It demonstrates why securing your home Wi-Fi is essential." }
+    ]
+  },
+  {
+    title: "Identity Theft & Credit Protection", icon: "🛡️", color: "purple", minLevel: 5,
+    desc: "Protect your identity, monitor your credit, and understand how to prevent and respond to identity theft.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Checking your credit report regularly can help you detect identity theft early.", correct:true,
+        explanation:"<strong>TRUE.</strong> Regular credit report checks help you spot unauthorized accounts, inquiries, or suspicious activity early. In many countries, you're entitled to free annual credit reports — use them." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What should you do if you lose your wallet containing credit cards?", choices:["Wait a few days to see if it turns up","Contact your bank and credit card companies immediately to report them stolen","Post about it on social media asking if anyone found it","Change your email password"], correct:1,
+        explanation:"<strong>Report stolen cards immediately.</strong> Most banks have zero-liability policies if reported quickly. Waiting increases the risk of fraudulent charges. Also consider filing a police report and placing a fraud alert on your credit." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Shredding documents that contain personal information before disposing of them is a good security practice.", correct:true,
+        explanation:"<strong>TRUE.</strong> Dumpster diving is a real threat. Bank statements, tax documents, medical records, and anything with account numbers or personal details should be cross-cut shredded before disposal." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'credit freeze' and when should you use it?", choices:["Stopping all your credit cards","Preventing new credit accounts from being opened in your name","Pausing your credit card payments","Closing your bank account"], correct:1,
+        explanation:"A <strong>credit freeze</strong> blocks access to your credit report, preventing identity thieves from opening new accounts in your name. It's free, doesn't affect your credit score, and you can temporarily lift it when needed." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'synthetic identity theft'?", choices:["Stealing someone's identity online only","Creating a fake identity using a mix of real and fabricated information","Using stolen biometric data","Identity theft using artificial intelligence"], correct:1,
+        explanation:"<strong>Synthetic identity theft</strong> combines a real Social Security number (often from children or deceased individuals) with fake names and addresses to create a new identity. It's harder to detect than traditional identity theft." },
+      { type:"fillin", tag:"FILL IN THE BLANK", question:"_______ monitoring services alert you to suspicious activity on your credit reports and can help detect identity theft early.", hint:"Services that watch your financial accounts", correct:["credit","credit monitoring","identity theft protection"],
+        explanation:"<strong>Credit monitoring</strong> services track changes to your credit reports and alert you to new accounts, inquiries, or suspicious activity. Many banks offer this free, or you can use services like Credit Karma or Experian." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'account takeover' (ATO) fraud?", choices:["When a hacker gains access to your existing accounts rather than opening new ones","When your bank closes your account","When you forget your password","When your credit card expires"], correct:0,
+        explanation:"<strong>Account takeover</strong> is when attackers gain access to your existing accounts (email, banking, social media) using stolen credentials, phishing, or social engineering. Enable MFA on all accounts to protect against ATO." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Child identity theft occurs when someone uses a minor's Social Security number to open accounts, and often goes undetected for years.", correct:true,
+        explanation:"<strong>TRUE.</strong> Children's clean credit histories are valuable targets. Theft often isn't discovered until the child applies for student loans or their first credit card years later. Consider freezing your children's credit." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is the 'dark web' and why is it relevant to identity theft?", choices:["A type of malware","Hidden internet networks where stolen personal data is bought and sold","A cybersecurity company","A secure government network"], correct:1,
+        explanation:"The <strong>dark web</strong> consists of encrypted networks (like Tor) where stolen data — credentials, Social Security numbers, credit cards — is traded. Data breach monitoring services check if your information appears there." }
+    ]
+  },
+  {
+    title: "Online Shopping Safety", icon: "🛒", color: "orange", minLevel: 5,
+    desc: "Shop securely online, identify fake stores, protect your payment information, and avoid common e-commerce scams.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"You should only shop on websites that have 'https://' in their address bar.", correct:true,
+        explanation:"<strong>TRUE.</strong> HTTPS encrypts data between your browser and the website, protecting your payment info in transit. Never enter credit card details on sites without HTTPS. However, HTTPS alone doesn't guarantee legitimacy." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is the safest way to pay for online purchases?", choices:["Wire transfer or cash pickup","Credit card with fraud protection","Debit card linked directly to your checking account","Cryptocurrency sent to an untraceable wallet"], correct:1,
+        explanation:"<strong>Credit cards</strong> offer the best fraud protection and dispute resolution. Many provide zero-liability policies and you can dispute charges. Debit cards draw directly from your bank account with fewer protections." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"If a deal looks too good to be true, it probably is a scam.", correct:true,
+        explanation:"<strong>TRUE.</strong> Luxury items at 90% off, brand new iPhones for $50, miracle products — these are red flags. Scammers use unrealistic deals to lure victims. Research the seller and check reviews before buying." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What should you look for to verify an online store is legitimate?", choices:["Lots of pop-up ads","Contact information, return policy, customer reviews, and secure payment options","The lowest prices on the internet","Requests to wire money directly"], correct:1,
+        explanation:"Legitimate stores have: clear contact info, professional design, return/refund policies, secure payment options, and verifiable reviews. Red flags: no contact info, requests for wire transfers, suspiciously low prices, poor grammar." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'card skimming' in the context of online shopping?", choices:["Stealing physical credit cards","Malware that captures your credit card details when entered on compromised websites","Legitimate merchant processing fees","A type of discount coupon"], correct:1,
+        explanation:"Online <strong>card skimming</strong> involves injecting malicious code into legitimate e-commerce sites to steal payment information during checkout. Always check that the payment page URL matches the store's domain." },
+      { type:"fillin", tag:"FILL IN THE BLANK", question:"_______ cards are prepaid cards you can use for online shopping to limit your exposure if the number is stolen.", hint:"Think 'temporary' or 'one-time use'", correct:["virtual","prepaid","disposable","virtual credit"],
+        explanation:"<strong>Virtual or prepaid cards</strong> let you generate temporary card numbers for online purchases. If stolen, attackers only get access to a limited-balance card, not your main account. Many banks offer this feature." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'fake shopping website' scam?", choices:["Websites that sell counterfeit goods legally","Entirely fraudulent sites designed to steal payment information and never deliver goods","Legitimate stores with misleading advertising","Price comparison websites"], correct:1,
+        explanation:"<strong>Fake shopping sites</strong> are sophisticated scams that look like real stores. They steal your payment info and never ship anything. Check for: recent domain registration, no social media presence, stolen product images." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Receiving an unexpected package you didn't order could be part of a 'brushing' scam where sellers send items to post fake reviews.", correct:true,
+        explanation:"<strong>TRUE.</strong> <strong>Brushing scams</strong> involve sellers shipping cheap items to real addresses (often from data breaches) so they can post fake 'verified purchase' reviews. You keep the item, but it indicates your data may be compromised." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'triangulation fraud' in e-commerce?", choices:["Three people splitting a purchase","A scam where criminals use stolen cards to buy items from real stores and ship them to victims who paid the scammer","A legitimate payment processing method","A type of shipping insurance"], correct:1,
+        explanation:"<strong>Triangulation fraud</strong>: You buy from a fake seller → they use a stolen card to buy from a legit store → item ships to you → cardholder disputes, you lose item and money. Always verify seller legitimacy." }
+    ]
+  },
+  {
+    title: "Physical Access Security", icon: "🚪", color: "teal",
+    desc: "Understand physical security risks, from unlocked devices to shoulder surfing, and learn to protect your physical access points.",
+    easy: [
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Leaving your laptop unattended in a coffee shop while you use the restroom is safe if you're only gone for a minute.", correct:false,
+        explanation:"<strong>FALSE.</strong> Laptop theft takes seconds. Unattended devices are easy targets for opportunistic thieves. Always take devices with you or use a cable lock. The same applies to bags, phones, and tablets." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'shoulder surfing'?", choices:["A type of exercise","Watching someone enter passwords or PINs by looking over their shoulder","Hacking into shoulder-mounted cameras","A social media trend"], correct:1,
+        explanation:"<strong>Shoulder surfing</strong> is spying on someone's screen or keyboard to steal sensitive information. Be aware of your surroundings when entering passwords, PINs, or viewing confidential info — especially in public." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Setting your computer to automatically lock after a few minutes of inactivity is a good security practice.", correct:true,
+        explanation:"<strong>TRUE.</strong> Auto-lock protects against unauthorized access if you step away. Set it to 5 minutes or less on work devices. Combine with a strong password or biometric unlock for best security." }
+    ],
+    moderate: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"An unauthorized person follows you into a secured building by walking in right behind you. This is called:", choices:["Social engineering","Tailgating","Vishing","Pharming"], correct:1,
+        explanation:"<strong>Tailgating</strong> (or piggybacking) exploits courtesy — people hold doors open. Always verify that people behind you have their own access credentials. Politely ask them to badge in separately." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What should you do if you find a USB drive in your office parking lot?", choices:["Plug it into your work computer to find the owner","Hand it to IT security without plugging it in","Keep it for personal use","Plug it into a personal device instead"], correct:1,
+        explanation:"This could be a <strong>baiting attack</strong> — USB drives deliberately left to infect systems with malware. Never plug in unknown USB devices. Always hand them to IT security who can safely investigate." },
+      { type:"fillin", tag:"FILL IN THE BLANK", question:"A _______ filter is a screen protector that prevents people beside or behind you from seeing your display.", hint:"Keeps information confidential from people not directly in front of the screen", correct:["privacy","privacy screen","privacy filter"],
+        explanation:"<strong>Privacy filters</strong> (privacy screens) use micro-louvers to narrow the viewing angle. People beside or behind you see only a dark screen. Essential for working with sensitive data in public or open offices." }
+    ],
+    hard: [
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is a 'rubber ducky' attack in physical security?", choices:["A waterproofing test for electronics","A USB device that emulates a keyboard to rapidly execute malicious commands when plugged in","A password cracking technique","A type of phishing email"], correct:1,
+        explanation:"A <strong>USB Rubber Ducky</strong> looks like a USB drive but acts as a keyboard. When plugged in, it types pre-programmed commands faster than humans can react — installing malware, stealing data, or creating backdoors." },
+      { type:"truefalse", tag:"TRUE OR FALSE", question:"Biometric authentication (fingerprint, facial recognition) eliminates the need for physical security measures on devices.", correct:false,
+        explanation:"<strong>FALSE.</strong> Biometrics add security but don't replace physical protection. Devices can still be stolen, data extracted via other methods, or biometrics bypassed. Use biometrics PLUS strong passwords and full-disk encryption." },
+      { type:"multiple", tag:"CHOOSE THE BEST ANSWER", question:"What is 'dumpster diving' in cybersecurity?", choices:["Hacking into waste management systems","Searching through trash to find sensitive documents or devices with recoverable data","A data recovery technique","A type of social engineering via email"], correct:1,
+        explanation:"<strong>Dumpster diving</strong> involves searching trash for discarded documents, hard drives, or devices containing sensitive data. Shred all documents with personal info and properly wipe or physically destroy old hard drives." }
+    ]
+  }
+];
+
+// ══════════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════════
+
+let state = {
+  xp: 0,
+  streak: 0,
+  lessonsDone: 0,
+  lessonStars: {},
+  lessonCompleted: {}  // "lessonIdx" -> true (for first-time XP tracking)
+};
+
+let quiz = {
+  lessonIdx: 0,
+  questionIdx: 0,
+  correctCount: 0,
+  selectedAnswer: null,
+  answered: false,
+  xpEarned: 0,
+  hearts: 3,
+  isFirstTime: false
+};
+
+// ══════════════════════════════════════════════════════════════════
+//  RENDER HOME
+// ══════════════════════════════════════════════════════════════════
+
+function renderHome() {
+  const lvl = getLevel(state.xp);
+  const next = getNextLevel(state.xp);
+  const xpForNext = next ? next.minXP : null;
+  const progress = next ? Math.round(((state.xp - lvl.minXP) / (xpForNext - lvl.minXP)) * 100) : 100;
+
+  document.getElementById('nav-xp').textContent = state.xp;
+  document.getElementById('nav-streak').textContent = state.streak;
+
+  document.getElementById('ov-xp').textContent = state.xp;
+  document.getElementById('ov-streak').textContent = state.streak;
+  document.getElementById('ov-lessons').textContent = state.lessonsDone;
+  const totalStars = Object.values(state.lessonStars).reduce((a,b)=>a+b,0);
+  document.getElementById('ov-stars').textContent = totalStars;
+
+  // Update level display
+  document.getElementById('ov-level-val').textContent = `LV${lvl.level}`;
+  document.getElementById('ov-level-title').textContent = lvl.title;
+  document.getElementById('ov-level-bar').style.width = progress + '%';
+  document.getElementById('ov-level-next').textContent = next
+    ? `${state.xp} / ${xpForNext} XP → ${next.title}`
+    : `MAX LEVEL — ${state.xp} XP`;
+
+  const grid = document.getElementById('lessons-grid');
+  grid.innerHTML = '';
+
+  LESSONS.forEach((lesson, idx) => {
+    const stars = state.lessonStars[idx] || 0;
+    const completed = !!state.lessonCompleted[idx];
+    const progress = completed ? 100 : 0;
+
+    const starsHTML = Array.from({length:3}, (_,i) =>
+      `<span class="lstar ${i < stars ? 'filled' : ''}">★</span>`).join('');
+
+    const badgeHTML = completed
+      ? `<span class="badge-done">✓ COMPLETE</span>`
+      : `<span class="badge-new">NEW</span>`;
+
+    const card = document.createElement('div');
+    card.className = 'lesson-card';
+    card.dataset.color = lesson.color;
+    card.onclick = () => startLesson(idx);
+    card.innerHTML = `
+      <div class="lesson-card-top">
+        <div class="lesson-icon-wrap">${lesson.icon}</div>
+        <div class="lesson-stars">${starsHTML}</div>
+      </div>
+      <div class="lesson-card-title">${lesson.title}</div>
+      <div class="lesson-card-desc">${lesson.desc}</div>
+      <div class="lesson-card-footer">
+        <div class="lesson-meta">
+          <span class="lesson-pill">📝 ${lesson.easy.length} questions</span>
+        </div>
+        ${badgeHTML}
+      </div>
+      <div class="lesson-progress-bar">
+        <div class="lesson-progress-fill" style="width:${progress}%"></div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  START LESSON (removed difficulty picker)
+// ══════════════════════════════════════════════════════════════════
+
+function startLesson(idx) {
+  quiz.lessonIdx = idx;
+  quiz.questionIdx = 0;
+  quiz.correctCount = 0;
+  quiz.answered = false;
+  quiz.selectedAnswer = null;
+  quiz.xpEarned = 0;
+  quiz.hearts = 3;
+  quiz.isFirstTime = !state.lessonCompleted[idx]; // Track if first time
+
+  const lesson = LESSONS[idx];
+  document.getElementById('quiz-lesson-label').textContent = lesson.title;
+  document.getElementById('hearts-count').textContent = quiz.hearts;
+
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  RENDER QUESTION (simplified - only use 'easy' questions)
+// ══════════════════════════════════════════════════════════════════
+
+function renderQuestion() {
+  const questions = LESSONS[quiz.lessonIdx].easy; // Only use easy questions
+  const q = questions[quiz.questionIdx];
+  const total = questions.length;
+
+  document.getElementById('progress-bar').style.width = ((quiz.questionIdx / total) * 100) + '%';
+  document.getElementById('hearts-count').textContent = quiz.hearts;
+  document.getElementById('quiz-footer').style.display = 'block';
+  document.getElementById('feedback-panel').style.display = 'none';
+
+  quiz.answered = false;
+  quiz.selectedAnswer = null;
+
+  let html = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+      <div class="q-type-tag">${q.tag}</div>
+      <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-light);">${quiz.questionIdx+1}/${total}</span>
+    </div>
+    <div class="q-text">${q.question}</div>
+  `;
+
+  if (q.hint) html += `<div class="q-hint">💡 ${q.hint}</div>`;
+
+  if (q.type === 'multiple') {
+    html += `<div class="choices-grid">`;
+    ['A','B','C','D'].forEach((l, i) => {
+      html += `<button class="choice-btn" id="choice-${i}" onclick="selectChoice(${i})">
+        <span class="choice-letter">${l}</span><span>${q.choices[i]}</span>
+      </button>`;
+    });
+    html += `</div>`;
+  } else if (q.type === 'truefalse') {
+    html += `<div class="tf-grid">
+      <button class="tf-btn true-btn" id="tf-true" onclick="selectTF(true)"><span class="tf-icon">✅</span><span>TRUE</span></button>
+      <button class="tf-btn false-btn" id="tf-false" onclick="selectTF(false)"><span class="tf-icon">❌</span><span>FALSE</span></button>
+    </div>`;
+  } else if (q.type === 'fillin') {
+    html += `<input class="fill-input" id="fill-input" type="text" placeholder="Type your answer…"
+      oninput="onFillInput()"
+      onkeydown="if(event.key==='Enter' && document.getElementById('check-btn').classList.contains('ready')) checkAnswer()">`;
+  }
+
+  document.getElementById('quiz-body').innerHTML = html;
+  const checkBtn = document.getElementById('check-btn');
+  checkBtn.className = 'btn-check';
+  checkBtn.textContent = 'CHECK';
+  if (q.type === 'fillin') setTimeout(() => document.getElementById('fill-input')?.focus(), 50);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  INTERACTIONS
+// ══════════════════════════════════════════════════════════════════
+
+function selectChoice(idx) {
+  if (quiz.answered) return;
+  quiz.selectedAnswer = idx;
+  document.querySelectorAll('.choice-btn').forEach((el, i) => el.classList.toggle('selected', i === idx));
+  document.getElementById('check-btn').classList.add('ready');
+}
+
+function selectTF(val) {
+  if (quiz.answered) return;
+  quiz.selectedAnswer = val;
+  document.getElementById('tf-true').classList.toggle('selected', val === true);
+  document.getElementById('tf-false').classList.toggle('selected', val === false);
+  document.getElementById('check-btn').classList.add('ready');
+}
+
+function onFillInput() {
+  const val = document.getElementById('fill-input').value.trim();
+  document.getElementById('check-btn').classList.toggle('ready', val.length > 0);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  CHECK ANSWER
+// ══════════════════════════════════════════════════════════════════
+
+function checkAnswer() {
+  if (quiz.answered) return;
+  const q = LESSONS[quiz.lessonIdx].easy[quiz.questionIdx]; // Only use easy
+  let correct = false;
+
+  if (q.type === 'multiple') {
+    if (quiz.selectedAnswer === null) return;
+    correct = quiz.selectedAnswer === q.correct;
+    document.querySelectorAll('.choice-btn').forEach((el, i) => {
+      el.disabled = true;
+      if (i === q.correct) el.classList.add('correct');
+      else if (i === quiz.selectedAnswer && !correct) el.classList.add('wrong');
+    });
+  } else if (q.type === 'truefalse') {
+    if (quiz.selectedAnswer === null) return;
+    correct = quiz.selectedAnswer === q.correct;
+    document.getElementById('tf-true').disabled = true;
+    document.getElementById('tf-false').disabled = true;
+    if (q.correct === true) { document.getElementById('tf-true').classList.add('correct'); if (!correct) document.getElementById('tf-false').classList.add('wrong'); }
+    else { document.getElementById('tf-false').classList.add('correct'); if (!correct) document.getElementById('tf-true').classList.add('wrong'); }
+  } else if (q.type === 'fillin') {
+    const input = document.getElementById('fill-input');
+    const val = input.value.trim().toLowerCase();
+    if (!val) return;
+    correct = q.correct.some(ans => val === ans.toLowerCase() || val.includes(ans.toLowerCase()));
+    input.disabled = true;
+    input.classList.add(correct ? 'correct' : 'wrong');
+  }
+
+  quiz.answered = true;
+  document.getElementById('quiz-footer').style.display = 'none';
+
+  if (correct) {
+    quiz.correctCount++;
+    
+    // Only award XP if this is the first time completing the lesson
+    if (quiz.isFirstTime) {
+      const xp = 5; // Fixed 5 XP per correct answer
+      quiz.xpEarned += xp;
+      state.xp += xp;
+      popXP(xp);
+    }
+    
+    showFeedback(true, q.explanation);
+  } else {
+    // Deduct heart on wrong answer
+    quiz.hearts--;
+    document.getElementById('hearts-count').textContent = quiz.hearts;
+    
+    // Check if out of hearts
+    if (quiz.hearts <= 0) {
+      setTimeout(() => {
+        showScreen('vocab-screen');
+        startVocabPractice();
+      }, 2000); // Wait 2 seconds to show explanation first
+    }
+    
+    showFeedback(false, q.explanation);
+    shakeEl(document.getElementById('quiz-modal'));
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  FEEDBACK & NAVIGATION
+// ══════════════════════════════════════════════════════════════════
+
+function showFeedback(isCorrect, explanation) {
+  const panel = document.getElementById('feedback-panel');
+  panel.style.display = 'block';
+  panel.className = 'feedback-panel ' + (isCorrect ? 'correct-panel' : 'wrong-panel');
+  document.getElementById('fb-icon').textContent = isCorrect ? '🎉' : '💡';
+  document.getElementById('fb-title').textContent = isCorrect
+    ? ['Correct!','Amazing!','You got it!','Nailed it!','Great job!'][Math.floor(Math.random()*5)]
+    : "Here's what you need to know:";
+  document.getElementById('fb-explanation').innerHTML = explanation;
+}
+
+function nextQuestion() {
+  const questions = LESSONS[quiz.lessonIdx].easy; // Only use easy
+  quiz.questionIdx++;
+  if (quiz.questionIdx >= questions.length) showComplete();
+  else renderQuestion();
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  COMPLETE
+// ══════════════════════════════════════════════════════════════════
+
+function showComplete() {
+  const questions = LESSONS[quiz.lessonIdx].easy;
+  const total = questions.length;
+  const accuracy = Math.round((quiz.correctCount / total) * 100);
+  const prevXP = state.xp - quiz.xpEarned; // before this session
+  const prevLevel = getLevel(prevXP);
+  const newLevel  = getLevel(state.xp);
+  const leveledUp = newLevel.level > prevLevel.level;
+
+  // Mark lesson complete
+  const wasFirstTime = quiz.isFirstTime;
+  state.lessonCompleted[quiz.lessonIdx] = true;
+
+  // Update stars based on accuracy
+  const stars = accuracy === 100 ? 3 : accuracy >= 60 ? 2 : accuracy >= 40 ? 1 : 0;
+  const prev = state.lessonStars[quiz.lessonIdx] || 0;
+  if (stars > prev) {
+    state.lessonStars[quiz.lessonIdx] = stars;
+    if (prev === 0 && stars > 0) { state.lessonsDone++; state.streak++; }
+  }
+
+  document.getElementById('progress-bar').style.width = '100%';
+  document.getElementById('final-xp').textContent = wasFirstTime ? '+' + quiz.xpEarned : '+0';
+  document.getElementById('final-accuracy').textContent = accuracy + '%';
+  document.getElementById('final-rating').textContent = accuracy===100?'🏆':accuracy>=60?'⭐⭐':'⭐';
+  document.getElementById('complete-trophy').textContent = accuracy===100?'🏆':accuracy>=60?'🎯':'💪';
+  document.getElementById('complete-title').textContent = accuracy===100?'Perfect Score!':'Lesson Complete!';
+  
+  const subtitle = `${quiz.correctCount}/${total} correct · ${accuracy}% accuracy`;
+  const xpNote = wasFirstTime ? '' : ' · Practice (no XP)';
+  document.getElementById('complete-subtitle').textContent = subtitle + xpNote;
+
+  const lvlBanner = document.getElementById('level-up-banner');
+  if (leveledUp && wasFirstTime) {
+    lvlBanner.style.display = 'block';
+    document.getElementById('level-up-text').textContent =
+      `${prevLevel.title} → ${newLevel.title} (Level ${newLevel.level})`;
+  } else {
+    lvlBanner.style.display = 'none';
+  }
+
+  showScreen('complete-screen');
+}
+
+function finishLesson() { showScreen('home-screen'); renderHome(); }
+function retryLesson()  { startLesson(quiz.lessonIdx); }
+function closeQuiz()    { showScreen('home-screen'); renderHome(); }
+
+// ══════════════════════════════════════════════════════════════════
+//  VOCABULARY PRACTICE (Earn Hearts)
+// ══════════════════════════════════════════════════════════════════
+
+function startVocabPractice() {
+  vocabState.correctCount = 0;
+  vocabState.usedTerms = [];
+  vocabState.answered = false;
+  document.getElementById('vocab-hearts-count').textContent = quiz.hearts;
+  document.getElementById('vocab-progress').textContent = '0/5';
+  renderVocabQuestion();
+}
+
+function renderVocabQuestion() {
+  // Pick a random term that hasn't been used
+  const availableTerms = VOCAB_TERMS.filter((_, i) => !vocabState.usedTerms.includes(i));
+  if (availableTerms.length === 0) vocabState.usedTerms = []; // Reset if all used
+  
+  const termIdx = Math.floor(Math.random() * (vocabState.usedTerms.length === 0 ? VOCAB_TERMS.length : availableTerms.length));
+  const actualIdx = vocabState.usedTerms.length === 0 ? termIdx : VOCAB_TERMS.indexOf(availableTerms[termIdx]);
+  
+  vocabState.currentTerm = VOCAB_TERMS[actualIdx];
+  vocabState.usedTerms.push(actualIdx);
+  vocabState.answered = false;
+  
+  // Display term
+  document.getElementById('vocab-term').textContent = vocabState.currentTerm.term;
+  
+  // Shuffle choices
+  const choices = [vocabState.currentTerm.definition, ...vocabState.currentTerm.wrong];
+  const shuffled = choices.sort(() => Math.random() - 0.5);
+  
+  // Render choices
+  const choicesHTML = shuffled.map((choice, i) => 
+    `<button class="vocab-choice-btn" onclick="checkVocabAnswer(${i}, '${choice.replace(/'/g, "\\'")}')">
+      ${choice}
+    </button>`
+  ).join('');
+  
+  document.getElementById('vocab-choices').innerHTML = choicesHTML;
+  document.getElementById('vocab-feedback').style.display = 'none';
+}
+
+function checkVocabAnswer(idx, selectedChoice) {
+  if (vocabState.answered) return;
+  vocabState.answered = true;
+  
+  const correct = selectedChoice === vocabState.currentTerm.definition;
+  const buttons = document.querySelectorAll('.vocab-choice-btn');
+  
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (btn.textContent.trim() === vocabState.currentTerm.definition) {
+      btn.classList.add('correct');
+    } else if (i === idx && !correct) {
+      btn.classList.add('wrong');
+    }
+  });
+  
+  const feedback = document.getElementById('vocab-feedback');
+  feedback.style.display = 'block';
+  
+  if (correct) {
+    vocabState.correctCount++;
+    feedback.style.background = 'var(--green-light)';
+    feedback.style.color = 'var(--green-dark)';
+    feedback.textContent = '✓ Correct! Great job!';
+    
+    document.getElementById('vocab-progress').textContent = `${vocabState.correctCount}/5`;
+    
+    if (vocabState.correctCount >= 5) {
+      // Restore all hearts!
+      setTimeout(() => {
+        quiz.hearts = 3;
+        document.getElementById('hearts-count').textContent = quiz.hearts;
+        showScreen('quiz-screen');
+        popXP(0); // Just for the animation effect
+        const el = document.createElement('div');
+        el.className = 'xp-pop';
+        el.textContent = '❤️ Hearts Restored!';
+        el.style.background = 'var(--red)';
+        el.style.color = 'white';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1400);
+      }, 1500);
+    } else {
+      setTimeout(renderVocabQuestion, 1500);
+    }
+  } else {
+    feedback.style.background = 'var(--red-light)';
+    feedback.style.color = 'var(--red)';
+    feedback.textContent = `✗ Incorrect. The correct definition is: "${vocabState.currentTerm.definition}"`;
+    setTimeout(renderVocabQuestion, 2500);
+  }
+}
+
+function closeVocab() {
+  showScreen('home-screen');
+  renderHome();
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  UTILITIES
+// ══════════════════════════════════════════════════════════════════
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'home-screen') renderHome();
+}
+
+function scrollToLessons()  { document.getElementById('lessons-section')?.scrollIntoView({behavior:'smooth',block:'start'}); }
+function scrollToProgress() { document.getElementById('progress-section')?.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function popXP(amount) {
+  const el = document.createElement('div');
+  el.className = 'xp-pop';
+  el.textContent = `+${amount} XP ⚡`;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1400);
+}
+
+function shakeEl(el) {
+  el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake');
+  el.addEventListener('animationend', () => el.classList.remove('shake'), {once:true});
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════════════
+
+renderHome();
+</script>
+</body>
+</html>
