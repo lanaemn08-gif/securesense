@@ -298,12 +298,6 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.lesson-card.locked {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
 .lesson-card::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0;
@@ -1321,7 +1315,7 @@ const LESSONS = [
     ]
   },
   {
-    title: "Social Media Safety", icon: "📱", color: "red", minXP: 200,
+    title: "Social Media Safety", icon: "📱", color: "red", minLevel: 5,
     desc: "Protect your personal information on social media, spot scams, and manage your digital footprint.",
     easy: [
       { type:"truefalse", tag:"TRUE OR FALSE", question:"It's safe to share your full date of birth, home town, and phone number publicly on social media.", correct:false,
@@ -1527,10 +1521,8 @@ function renderHome() {
       ? `<span class="badge-done">✓ COMPLETE</span>`
       : `<span class="badge-new">NEW</span>`;
 
-    const isLocked = lesson.minXP && state.xp < lesson.minXP;
-
     const card = document.createElement('div');
-    card.className = 'lesson-card' + (isLocked ? ' locked' : '');
+    card.className = 'lesson-card';
     card.dataset.color = lesson.color;
     card.onclick = () => startLesson(idx);
     card.innerHTML = `
@@ -1542,11 +1534,9 @@ function renderHome() {
       <div class="lesson-card-desc">${lesson.desc}</div>
       <div class="lesson-card-footer">
         <div class="lesson-meta">
-          ${isLocked
-            ? `<span class="lesson-pill" style="background:rgba(160,160,160,0.15);color:#a0a0a0;">🔒 Unlocks at ${lesson.minXP} XP</span>`
-            : `<span class="lesson-pill">📝 ${lesson.easy.length} questions</span>`}
+          <span class="lesson-pill">📝 ${lesson.easy.length} questions</span>
         </div>
-        ${isLocked ? '' : badgeHTML}
+        ${badgeHTML}
       </div>
       <div class="lesson-progress-bar">
         <div class="lesson-progress-fill" style="width:${progress}%"></div>
@@ -1561,9 +1551,6 @@ function renderHome() {
 // ══════════════════════════════════════════════════════════════════
 
 function startLesson(idx) {
-  const lesson = LESSONS[idx];
-  if (lesson.minXP && state.xp < lesson.minXP) return;
-
   quiz.lessonIdx = idx;
   quiz.questionIdx = 0;
   quiz.correctCount = 0;
