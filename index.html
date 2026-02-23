@@ -1496,13 +1496,27 @@ const LESSONS = [
 //  STATE
 // ══════════════════════════════════════════════════════════════════
 
-let state = {
+const DEFAULT_STATE = {
   xp: 200,
   streak: 0,
   lessonsDone: 0,
   lessonStars: {},
-  lessonCompleted: {}  // "lessonIdx" -> true (for first-time XP tracking)
+  lessonCompleted: {}
 };
+
+function saveState() {
+  localStorage.setItem('securesense_state', JSON.stringify(state));
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem('securesense_state');
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+
+let state = loadState();
 
 let quiz = {
   lessonIdx: 0,
@@ -1786,6 +1800,7 @@ function checkAnswer() {
       quiz.xpEarned += xp;
       state.xp += xp;
       popXP(xp);
+      saveState();
     }
     
     showFeedback(true, q.explanation);
@@ -1853,6 +1868,7 @@ function showComplete() {
     state.lessonStars[quiz.lessonIdx] = stars;
     if (prev === 0 && stars > 0) { state.lessonsDone++; state.streak++; }
   }
+  saveState();
 
   document.getElementById('progress-bar').style.width = '100%';
   document.getElementById('final-xp').textContent = wasFirstTime ? '+' + quiz.xpEarned : '+0';
