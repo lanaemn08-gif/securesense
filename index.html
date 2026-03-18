@@ -542,7 +542,7 @@ body {
 }
 
 .choice-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.15); transform: scale(1.01); }
-.choice-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+.choice-btn.selected { border-color: var(--blue); background: rgba(28,176,246,0.2); color: var(--text); }
 .choice-btn.correct  { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
 .choice-btn.wrong    { border-color: var(--red);   background: var(--red-light);   color: var(--red); }
 .choice-btn:disabled { cursor: not-allowed; }
@@ -576,6 +576,7 @@ body {
 .tf-btn:hover:not(:disabled) { transform: scale(1.03); }
 .tf-btn.true-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.15); }
 .tf-btn.false-btn:hover:not(:disabled) { border-color: #10b981; background: rgba(16, 185, 129, 0.15); }
+.tf-btn.selected { border-color: var(--blue); background: rgba(28,176,246,0.2); color: var(--text); }
 .tf-btn.correct { border-color: var(--green); background: var(--green-light); }
 .tf-btn.wrong   { border-color: var(--red);   background: var(--red-light); }
 .tf-btn:disabled { cursor: not-allowed; }
